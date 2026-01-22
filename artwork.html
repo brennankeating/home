@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artwork | Graphic Designer & Digital Marketer</title>
+    <link rel="stylesheet" href="https://use.typekit.net/qen5jnd.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Artwork Page Specific Styles */
+        .artwork-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            padding: 0 4rem 8rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .artwork-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 1080 / 1350;
+            cursor: pointer;
+            border: 1px solid var(--gray-800);
+            transition: border-color 0.3s ease, transform 0.4s ease;
+        }
+
+        .artwork-item:hover {
+            border-color: var(--gray-600);
+            transform: translateY(-5px);
+        }
+
+        .artwork-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .artwork-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Multi-image indicator on thumbnail */
+        .artwork-item .multi-indicator {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid var(--gray-600);
+            padding: 0.4rem 0.6rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .artwork-item .multi-indicator svg {
+            width: 12px;
+            height: 12px;
+            stroke: var(--white);
+            stroke-width: 2;
+            fill: none;
+        }
+
+        /* Lightbox Styles */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            padding: 2rem;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border: 1px solid var(--gray-700);
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: 1px solid var(--gray-600);
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            border-color: var(--white);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: transparent;
+            border: 1px solid var(--gray-600);
+            color: var(--white);
+            font-size: 1.25rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-nav:hover {
+            border-color: var(--white);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .lightbox-prev {
+            left: -70px;
+        }
+
+        .lightbox-next {
+            right: -70px;
+        }
+
+        /* Version indicators (dots) */
+        .version-indicators {
+            position: absolute;
+            bottom: -45px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .version-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--gray-700);
+            border: 1px solid var(--gray-600);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .version-dot:hover {
+            background: var(--gray-500);
+        }
+
+        .version-dot.active {
+            background: var(--white);
+            border-color: var(--white);
+        }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: -45px;
+            right: 0;
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            letter-spacing: 0.1em;
+        }
+
+        .artwork-title {
+            position: absolute;
+            bottom: -45px;
+            left: 0;
+            font-size: 0.75rem;
+            color: var(--gray-400);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 768px) {
+            .artwork-grid {
+                padding: 0 2rem 5rem;
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .lightbox-prev {
+                left: 10px;
+            }
+
+            .lightbox-next {
+                right: 10px;
+            }
+
+            .lightbox-nav {
+                width: 40px;
+                height: 40px;
+            }
+
+            .lightbox-content img {
+                max-height: 70vh;
+            }
+
+            .version-indicators {
+                bottom: -40px;
+            }
+
+            .lightbox-counter,
+            .artwork-title {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo">Brennan Keating</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="artwork.html">Artwork</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1 class="page-title">Artwork</h1>
+        <p class="page-subtitle">A visual gallery showcasing personal artwork, explorations, and creative experiments.</p>
+    </header>
+
+    <!-- Artwork Grid -->
+    <!--
+        Each artwork item can have multiple versions.
+        Use data-images to list all versions (comma-separated).
+        Use data-title to set the artwork name.
+        The first image is used as the thumbnail.
+
+        Example with multiple versions:
+        data-images="images/artwork/artwork-01-01,images/artwork/artwork-01-02,images/artwork/artwork-01-03"
+
+        Example with single image:
+        data-images="images/artwork/artwork-02-01.jpg"
+    -->
+    <section class="artwork-grid">
+        <div class="artwork-item"
+             data-images="images/artwork/artwork-01-01"
+             data-title="Nike Jumpman">
+            <img data-src="images/artwork/artwork-01-01" alt="Artwork 01">
+        </div>
+
+        <div class="artwork-item"
+             data-images="images/artwork/artwork-02-01"
+             data-title="Miami Exotic">
+            <img data-src="images/artwork/artwork-02-01" alt="Artwork 02">
+        </div>
+
+        <div class="artwork-item"
+             data-images="images/artwork/artwork-03-01"
+             data-title="Jai Jai">
+            <img data-src="images/artwork/artwork-03-01" alt="Artwork 03">
+        </div>
+
+        <div class="artwork-item"
+             data-images="images/artwork/artwork-04-01,images/artwork/artwork-04-02,images/artwork/artwork-04-03,images/artwork/artwork-04-04,images/artwork/artwork-04-05,images/artwork/artwork-04-06,images/artwork/artwork-04-07,images/artwork/artwork-04-08,images/artwork/artwork-04-09,images/artwork/artwork-04-10"
+             data-title="Cars">
+            <img data-src="images/artwork/artwork-04-01" alt="Artwork 03">
+            <div class="multi-indicator">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h10M7 12h10M7 17h6"/></svg>
+                10
+            </div>
+        </div>
+
+        <div class="artwork-item"
+             data-images="images/artwork/artwork-05-01,images/artwork/artwork-05-02,images/artwork/artwork-05-03,images/artwork/artwork-05-04"
+             data-title="NSX">
+            <img data-src="images/artwork/artwork-05-01" alt="Artwork 05">
+            <div class="multi-indicator">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h10M7 12h10M7 17h6"/></svg>
+                4
+            </div>
+        </div>
+
+
+        <div class="artwork-item"
+             data-images="images/artwork/artwork-06-01,images/artwork/artwork-06-02"
+             data-title="Doberman">
+            <img data-src="images/artwork/artwork-06-01" alt="Artwork 06">
+            <div class="multi-indicator">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h10M7 12h10M7 17h6"/></svg>
+                2
+            </div>
+        </div>
+
+        <div class="artwork-item"
+             data-images="images/artwork/artwork-07-01"
+             data-title="No Smoke">
+            <img data-src="images/artwork/artwork-07-01" alt="Artwork 07">
+        </div>
+
+        <div class="artwork-item"
+             data-images="images/artwork/artwork-08-01,images/artwork/artwork-08-02"
+             data-title="Angry Wolf">
+            <img data-src="images/artwork/artwork-08-01" alt="Artwork 08">
+            <div class="multi-indicator">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h10M7 12h10M7 17h6"/></svg>
+                2
+            </div>
+        </div>
+
+        <div class="artwork-item"
+             data-images="images/artwork/artwork-09-01"
+             data-title="Fron">
+            <img data-src="images/artwork/artwork-09-01" alt="Artwork 09">
+        </div>
+
+        <div class="artwork-item"
+             data-images="images/artwork/artwork-10-01"
+             data-title="Vampire">
+            <img data-src="images/artwork/artwork-10-01" alt="Artwork 10">
+        </div>
+
+        <div class="artwork-item"
+             data-images="images/artwork/artwork-11-01"
+             data-title="Run DMP">
+            <img data-src="images/artwork/artwork-11-01" alt="Artwork 11">
+        </div>
+
+        <div class="artwork-item"
+             data-images="images/artwork/artwork-12-01,images/artwork/artwork-12-02"
+             data-title="Dogs">
+            <img data-src="images/artwork/artwork-12-01" alt="Artwork 12">
+            <div class="multi-indicator">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h10M7 12h10M7 17h6"/></svg>
+                2
+            </div>
+        </div>
+
+        <div class="artwork-item"
+             data-images="images/artwork/artwork-13-01,images/artwork/artwork-13-02"
+             data-title="Elvis">
+            <img data-src="images/artwork/artwork-13-01" alt="Artwork 13">
+            <div class="multi-indicator">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h10M7 12h10M7 17h6"/></svg>
+                2
+            </div>
+        </div>
+
+        <div class="artwork-item"
+             data-images="images/artwork/artwork-14-01"
+             data-title="Angel">
+            <img data-src="images/artwork/artwork-14-01" alt="Artwork 14">
+        </div>
+
+        <div class="artwork-item"
+             data-images="images/artwork/artwork-15-01"
+             data-title="Style Fits">
+            <img data-src="images/artwork/artwork-15-01" alt="Artwork 15">
+        </div>
+
+        <div class="artwork-item"
+             data-images="images/artwork/artwork-16-01"
+             data-title="Sega Game Gear">
+            <img data-src="images/artwork/artwork-16-01" alt="Artwork 16">
+        </div>
+
+        <div class="artwork-item"
+             data-images="images/artwork/artwork-17-01"
+             data-title="Orange Racer">
+            <img data-src="images/artwork/artwork-17-01" alt="Artwork 17">
+        </div>
+
+        <div class="artwork-item"
+             data-images="images/artwork/artwork-18-01"
+             data-title="Stunna Shades">
+            <img data-src="images/artwork/artwork-18-01" alt="Artwork 18">
+        </div>
+
+        <div class="artwork-item"
+             data-images="images/artwork/artwork-19-01"
+             data-title="Stay Away">
+            <img data-src="images/artwork/artwork-19-01" alt="Artwork 19">
+        </div>
+
+        <div class="artwork-item"
+             data-images="images/artwork/artwork-20-01"
+             data-title="Reaper">
+            <img data-src="images/artwork/artwork-20-01" alt="Artwork 20">
+        </div>
+
+        <div class="artwork-item"
+             data-images="images/artwork/artwork-21-01"
+             data-title="Louie Bag">
+            <img data-src="images/artwork/artwork-21-01" alt="Artwork 21">
+        </div>
+
+        <div class="artwork-item"
+             data-images="images/artwork/artwork-22-01,images/artwork/artwork-22-02"
+             data-title="The Balaclava">
+            <img data-src="images/artwork/artwork-22-01" alt="Artwork 22">
+            <div class="multi-indicator">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 7h10M7 12h10M7 17h6"/></svg>
+                2
+            </div>
+        </div>
+
+        <div class="artwork-item"
+             data-images="images/artwork/artwork-23-01"
+             data-title="Sky">
+            <img data-src="images/artwork/artwork-23-01" alt="Artwork 23">
+        </div>
+
+        <div class="artwork-item"
+             data-images="images/artwork/artwork-24-01"
+             data-title="BMW Tech">
+            <img data-src="images/artwork/artwork-24-01" alt="Artwork 24">
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close">&times;</button>
+            <button class="lightbox-nav lightbox-prev">&larr;</button>
+            <img src="" alt="Artwork" id="lightbox-img">
+            <button class="lightbox-nav lightbox-next">&rarr;</button>
+            <span class="artwork-title" id="artwork-title"></span>
+            <div class="version-indicators" id="version-indicators"></div>
+            <div class="lightbox-counter">
+                <span id="current-index">1</span> / <span id="total-count">12</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text">&copy; 2026 Brennan Keating. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Load media with multiple format support (.webp, .png, .jpg, .gif, .mp4)
+        function loadMedia(img) {
+            const baseSrc = img.getAttribute('data-src');
+            if (!baseSrc) return;
+
+            const imageFormats = ['webp', 'png', 'jpg', 'gif'];
+            const videoFormats = ['mp4'];
+            let formatIndex = 0;
+            let tryingVideo = false;
+
+            function tryNextFormat() {
+                if (!tryingVideo && formatIndex >= imageFormats.length) {
+                    tryingVideo = true;
+                    formatIndex = 0;
+                }
+
+                if (tryingVideo) {
+                    if (formatIndex >= videoFormats.length) {
+                        console.error('Could not load media:', baseSrc);
+                        return;
+                    }
+                    const video = document.createElement('video');
+                    video.src = baseSrc + '.' + videoFormats[formatIndex];
+                    video.autoplay = true;
+                    video.loop = true;
+                    video.muted = true;
+                    video.playsInline = true;
+                    video.style.width = '100%';
+                    video.style.height = '100%';
+                    video.style.objectFit = 'cover';
+
+                    video.onerror = () => {
+                        formatIndex++;
+                        tryNextFormat();
+                    };
+
+                    video.onloadeddata = () => {
+                        img.parentNode.replaceChild(video, img);
+                    };
+                    return;
+                }
+
+                img.src = baseSrc + '.' + imageFormats[formatIndex];
+                formatIndex++;
+            }
+
+            img.onerror = tryNextFormat;
+            tryNextFormat();
+        }
+
+        document.querySelectorAll('img[data-src]').forEach(loadMedia);
+
+        // Lightbox functionality with multiple versions
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const currentIndexEl = document.getElementById('current-index');
+        const totalCountEl = document.getElementById('total-count');
+        const versionIndicators = document.getElementById('version-indicators');
+        const artworkTitleEl = document.getElementById('artwork-title');
+        const artworkItems = document.querySelectorAll('.artwork-item');
+
+        let currentArtworkIndex = 0;
+        let currentVersionIndex = 0;
+        let currentImages = [];
+
+        // Update total count
+        totalCountEl.textContent = artworkItems.length;
+
+        // Open lightbox
+        artworkItems.forEach((item, index) => {
+            item.addEventListener('click', () => {
+                currentArtworkIndex = index;
+                currentVersionIndex = 0;
+                loadArtwork(index);
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        // Close lightbox
+        document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Load artwork and its versions
+        function loadArtwork(index) {
+            const item = artworkItems[index];
+            const imagesAttr = item.dataset.images;
+            const title = item.dataset.title || `Artwork ${index + 1}`;
+
+            currentImages = imagesAttr ? imagesAttr.split(',') : [];
+            currentVersionIndex = 0;
+
+            // Update title
+            artworkTitleEl.textContent = title;
+
+            // Update counter
+            currentIndexEl.textContent = index + 1;
+
+            // Build version indicators
+            buildVersionIndicators();
+
+            // Show first image
+            updateLightboxImage();
+        }
+
+        // Build version indicator dots
+        function buildVersionIndicators() {
+            versionIndicators.innerHTML = '';
+
+            if (currentImages.length <= 1) {
+                return; // No indicators for single image
+            }
+
+            currentImages.forEach((_, idx) => {
+                const dot = document.createElement('button');
+                dot.className = 'version-dot' + (idx === currentVersionIndex ? ' active' : '');
+                dot.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    currentVersionIndex = idx;
+                    updateLightboxImage();
+                    updateVersionIndicators();
+                });
+                versionIndicators.appendChild(dot);
+            });
+        }
+
+        // Update active state on version indicators
+        function updateVersionIndicators() {
+            const dots = versionIndicators.querySelectorAll('.version-dot');
+            dots.forEach((dot, idx) => {
+                dot.classList.toggle('active', idx === currentVersionIndex);
+            });
+        }
+
+        // Update the lightbox image with multi-format support
+        function updateLightboxImage() {
+            if (currentImages.length > 0) {
+                const baseSrc = currentImages[currentVersionIndex];
+                const imageFormats = ['webp', 'png', 'jpg', 'gif'];
+                const videoFormats = ['mp4'];
+                let formatIndex = 0;
+                let tryingVideo = false;
+
+                // Check if there's already a video element and remove it
+                const existingVideo = lightboxImg.parentNode.querySelector('video.lightbox-video');
+                if (existingVideo) {
+                    existingVideo.remove();
+                }
+                lightboxImg.style.display = '';
+
+                function tryNextFormat() {
+                    if (!tryingVideo && formatIndex >= imageFormats.length) {
+                        tryingVideo = true;
+                        formatIndex = 0;
+                    }
+
+                    if (tryingVideo) {
+                        if (formatIndex >= videoFormats.length) {
+                            console.error('Could not load media:', baseSrc);
+                            return;
+                        }
+                        // Create video element for lightbox
+                        const video = document.createElement('video');
+                        video.src = baseSrc + '.' + videoFormats[formatIndex];
+                        video.autoplay = true;
+                        video.loop = true;
+                        video.muted = true;
+                        video.playsInline = true;
+                        video.controls = true;
+                        video.className = 'lightbox-video';
+                        video.style.maxWidth = '100%';
+                        video.style.maxHeight = '85vh';
+                        video.style.objectFit = 'contain';
+                        video.style.border = '1px solid var(--gray-700)';
+
+                        video.onerror = () => {
+                            formatIndex++;
+                            video.remove();
+                            tryNextFormat();
+                        };
+
+                        video.onloadeddata = () => {
+                            lightboxImg.style.display = 'none';
+                            lightboxImg.parentNode.insertBefore(video, lightboxImg);
+                        };
+                        return;
+                    }
+
+                    lightboxImg.src = baseSrc + '.' + imageFormats[formatIndex];
+                    formatIndex++;
+                }
+
+                lightboxImg.onerror = tryNextFormat;
+                lightboxImg.alt = `${artworkTitleEl.textContent} - Version ${currentVersionIndex + 1}`;
+                tryNextFormat();
+            }
+        }
+
+        // Navigate to previous artwork
+        function prevArtwork() {
+            currentArtworkIndex = (currentArtworkIndex - 1 + artworkItems.length) % artworkItems.length;
+            loadArtwork(currentArtworkIndex);
+        }
+
+        // Navigate to next artwork
+        function nextArtwork() {
+            currentArtworkIndex = (currentArtworkIndex + 1) % artworkItems.length;
+            loadArtwork(currentArtworkIndex);
+        }
+
+        // Navigation buttons
+        document.querySelector('.lightbox-prev').addEventListener('click', (e) => {
+            e.stopPropagation();
+            prevArtwork();
+        });
+
+        document.querySelector('.lightbox-next').addEventListener('click', (e) => {
+            e.stopPropagation();
+            nextArtwork();
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+
+            if (e.key === 'Escape') {
+                closeLightbox();
+            }
+            // Left/Right arrows navigate between artworks
+            if (e.key === 'ArrowLeft') {
+                prevArtwork();
+            }
+            if (e.key === 'ArrowRight') {
+                nextArtwork();
+            }
+            // Up/Down arrows navigate between versions
+            if (e.key === 'ArrowUp' && currentImages.length > 1) {
+                currentVersionIndex = (currentVersionIndex - 1 + currentImages.length) % currentImages.length;
+                updateLightboxImage();
+                updateVersionIndicators();
+            }
+            if (e.key === 'ArrowDown' && currentImages.length > 1) {
+                currentVersionIndex = (currentVersionIndex + 1) % currentImages.length;
+                updateLightboxImage();
+                updateVersionIndicators();
+            }
+        });
+
+        // Fade in artwork items on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }, index * 50);
+                }
+            });
+        }, observerOptions);
+
+        artworkItems.forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joe Playo | Project</title>
+    <link rel="stylesheet" href="https://use.typekit.net/qen5jnd.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo">Brennan Keating</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="artwork.html">Artwork</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Project Hero -->
+    <section class="project-hero">
+        <div class="project-hero-content">
+            <div class="project-meta">
+                <div class="meta-item">
+                    <span class="meta-label">Category</span>
+                    <span class="meta-value">Visual Design</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Client</span>
+                    <span class="meta-value">Joe Playo</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Year</span>
+                    <span class="meta-value">2019</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Services</span>
+                    <span class="meta-value">Logo Design, Album Art</span>
+                </div>
+            </div>
+            <h1 class="project-hero-title">Joe Playo</h1>
+            <p class="project-hero-desc">
+                Custom logo design and album artwork created for the artist Joe Playo, blending visual identity with musical expression.
+            </p>
+        </div>
+    </section>
+
+    <!-- Project Content -->
+    <main class="project-content">
+
+        <!-- Overview Section -->
+        <section class="project-section">
+            <h2 class="project-section-title">Overview</h2>
+            <p class="project-text">
+                Developed multiple album artworks for digital single releases and crafted a distinctive logo drawing inspiration from Japanese anime culture.
+            </p>
+        </section>
+
+        <!-- Main Gallery -->
+        <section class="project-section">
+            <h2 class="project-section-title">The Work</h2>
+            <div class="project-gallery">
+
+                <!-- Two Column Layout - 1080x1350 images -->
+                <div class="gallery-half">
+                    <div class="gallery-item">
+                        <img data-src="images/projects/project-08-01" alt="Project Image 1">
+                    </div>
+                    <div class="gallery-item">
+                        <img data-src="images/projects/project-08-02" alt="Project Image 2">
+                    </div>
+                </div>
+                
+                <!-- Two Column Layout - 1080x1350 images -->
+                <div class="gallery-half">
+                    <div class="gallery-item">
+                        <img data-src="images/projects/project-08-03" alt="Project Image 3">
+                    </div>
+                    <div class="gallery-item">
+                        <img data-src="images/projects/project-08-04" alt="Project Image 4">
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Results Section -->
+        <section class="project-section">
+            <h2 class="project-section-title">Results</h2>
+            <p class="project-text">
+                Album artwork concepts were developed for digital single releases, drawing inspiration from Japanese anime culture. The designs effectively captured the essence of each song, resulting in visually striking and cohesive album covers that caught the attention of fans and industry professionals alike. A distinctive logo design was also created, becoming a recognizable symbol of the brand and setting it apart from others in the music industry.
+            </p>
+        </section>
+
+    </main>
+
+    <!-- Project Navigation -->
+    <nav class="project-nav">
+        <a href="project-07.html" class="prev">
+            <span class="nav-label">Previous Project</span>
+            <span class="nav-title">Music Player UI</span>
+        </a>
+        <a href="project-09.html" class="next">
+            <span class="nav-label">Next Project</span>
+            <span class="nav-title">Heartout Productions</span>
+        </a>
+    </nav>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text">&copy; 2026 Brennan Keating. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // Load media with multiple format support (.webp, .png, .jpg, .gif, .mp4)
+        function loadMedia(img) {
+            const baseSrc = img.getAttribute('data-src');
+            if (!baseSrc) return;
+
+            const imageFormats = ['webp', 'png', 'jpg', 'gif'];
+            const videoFormats = ['mp4'];
+            let formatIndex = 0;
+            let tryingVideo = false;
+
+            function tryNextFormat() {
+                if (!tryingVideo && formatIndex >= imageFormats.length) {
+                    tryingVideo = true;
+                    formatIndex = 0;
+                }
+
+                if (tryingVideo) {
+                    if (formatIndex >= videoFormats.length) {
+                        console.error('Could not load media:', baseSrc);
+                        return;
+                    }
+                    const video = document.createElement('video');
+                    video.src = baseSrc + '.' + videoFormats[formatIndex];
+                    video.autoplay = true;
+                    video.loop = true;
+                    video.muted = true;
+                    video.playsInline = true;
+                    video.style.width = '100%';
+                    video.style.height = '100%';
+                    video.style.objectFit = 'cover';
+
+                    video.onerror = () => {
+                        formatIndex++;
+                        tryNextFormat();
+                    };
+
+                    video.onloadeddata = () => {
+                        img.parentNode.replaceChild(video, img);
+                    };
+                    return;
+                }
+
+                img.src = baseSrc + '.' + imageFormats[formatIndex];
+                formatIndex++;
+            }
+
+            img.onerror = tryNextFormat;
+            tryNextFormat();
+        }
+
+        document.querySelectorAll('img[data-src]').forEach(loadMedia);
+
+        // Fade in gallery items on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(30px)';
+            item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>
