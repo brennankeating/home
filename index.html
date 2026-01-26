@@ -31,6 +31,37 @@
         <div class="hero-gradient-orb orb-2"></div>
         <div class="hero-gradient-orb orb-3"></div>
 
+        <!-- Hero Image Sequence Animation -->
+        <div class="hero-sequence">
+            <img src="images/hero/hero_0000_01.webp" class="hero-frame active" data-frame="1" alt="">
+            <img src="images/hero/hero_0001_02.webp" class="hero-frame" data-frame="2" alt="">
+            <img src="images/hero/hero_0002_03.webp" class="hero-frame" data-frame="3" alt="">
+            <img src="images/hero/hero_0003_04.webp" class="hero-frame" data-frame="4" alt="">
+            <img src="images/hero/hero_0004_05.webp" class="hero-frame" data-frame="5" alt="">
+            <img src="images/hero/hero_0005_06.webp" class="hero-frame" data-frame="6" alt="">
+            <img src="images/hero/hero_0006_07.webp" class="hero-frame" data-frame="7" alt="">
+            <img src="images/hero/hero_0007_08.webp" class="hero-frame" data-frame="8" alt="">
+            <img src="images/hero/hero_0008_09.webp" class="hero-frame" data-frame="9" alt="">
+            <img src="images/hero/hero_0009_10.webp" class="hero-frame" data-frame="10" alt="">
+            <img src="images/hero/hero_0010_11.webp" class="hero-frame" data-frame="11" alt="">
+            <img src="images/hero/hero_0011_12.webp" class="hero-frame" data-frame="12" alt="">
+            <img src="images/hero/hero_0012_13.webp" class="hero-frame" data-frame="13" alt="">
+            <img src="images/hero/hero_0013_14.webp" class="hero-frame" data-frame="14" alt="">
+            <img src="images/hero/hero_0014_15.webp" class="hero-frame" data-frame="15" alt="">
+            <img src="images/hero/hero_0015_16.webp" class="hero-frame" data-frame="16" alt="">
+            <img src="images/hero/hero_0016_17.webp" class="hero-frame" data-frame="17" alt="">
+            <img src="images/hero/hero_0017_18.webp" class="hero-frame" data-frame="18" alt="">
+            <img src="images/hero/hero_0018_19.webp" class="hero-frame" data-frame="19" alt="">
+            <img src="images/hero/hero_0019_20.webp" class="hero-frame" data-frame="20" alt="">
+            <img src="images/hero/hero_0020_21.webp" class="hero-frame" data-frame="21" alt="">
+            <img src="images/hero/hero_0021_22.webp" class="hero-frame" data-frame="22" alt="">
+            <img src="images/hero/hero_0022_23.webp" class="hero-frame" data-frame="23" alt="">
+            <img src="images/hero/hero_0023_24.webp" class="hero-frame" data-frame="24" alt="">
+            <img src="images/hero/hero_0024_25.webp" class="hero-frame" data-frame="25" alt="">
+            <img src="images/hero/hero_0025_26.webp" class="hero-frame" data-frame="26" alt="">
+            <img src="images/hero/hero_0026_27.webp" class="hero-frame" data-frame="27" alt="">
+        </div>
+
         <div class="hero-content">
             <p class="hero-tagline">The Portfolio of Brennan Keating</p>
             <h1 class="hero-title">Digital Marketing & Graphic Design</h1>
@@ -302,6 +333,32 @@
         }, observerOptions);
 
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Hero Image Sequence Scroll Animation
+        const heroSection = document.querySelector('.hero');
+        const heroFrames = document.querySelectorAll('.hero-frame');
+        const totalFrames = heroFrames.length;
+        let currentFrame = 0;
+
+        function updateHeroFrame() {
+            const heroRect = heroSection.getBoundingClientRect();
+            const heroHeight = heroSection.offsetHeight;
+            const scrollProgress = Math.max(0, Math.min(1, -heroRect.top / (heroHeight * 0.8)));
+
+            const frameIndex = Math.min(
+                Math.floor(scrollProgress * totalFrames),
+                totalFrames - 1
+            );
+
+            if (frameIndex !== currentFrame) {
+                heroFrames[currentFrame].classList.remove('active');
+                heroFrames[frameIndex].classList.add('active');
+                currentFrame = frameIndex;
+            }
+        }
+
+        window.addEventListener('scroll', updateHeroFrame, { passive: true });
+        updateHeroFrame();
     </script>
 </body>
 </html>

@@ -191,6 +191,32 @@ nav.scrolled {
     75% { transform: translate(20px, 10px) scale(1.02); }
 }
 
+/* Hero Image Sequence */
+.hero-sequence {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.hero-frame {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    height: auto;
+    max-height: 85%;
+    max-width: 90%;
+    object-fit: contain;
+    opacity: 0;
+    transition: opacity 0.05s ease-out;
+}
+
+.hero-frame.active {
+    opacity: 1;
+}
+
 .hero-content {
     text-align: center;
     max-width: 1000px;
@@ -1031,6 +1057,11 @@ footer {
    ======================================== */
 
 @media (max-width: 1024px) {
+    .hero-frame {
+        max-height: 115%;
+        max-width: 115%;
+    }
+
     .about-grid {
         grid-template-columns: 1fr;
         max-width: 600px;
@@ -1046,6 +1077,11 @@ footer {
 }
 
 @media (max-width: 768px) {
+    .hero-frame {
+        max-height: 175%;
+        max-width: 175%;
+    }
+
     nav {
         padding: 1.5rem 2rem;
     }
