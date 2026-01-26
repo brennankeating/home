@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You | Graphic Designer & Digital Marketer</title>
+    <link rel="stylesheet" href="https://use.typekit.net/qen5jnd.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Thank You Page Specific Styles */
+        .thankyou-page {
+            min-height: 100vh;
+            padding: 10rem 4rem 6rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .thankyou-container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .thankyou-container h1 {
+            font-family: var(--font-headline);
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--white) 0%, var(--gray-400) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .thankyou-container p {
+            font-size: 1.25rem;
+            color: var(--gray-400);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+
+        .thankyou-container .contact-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .thankyou-container .contact-item {
+            display: flex;
+            flex-direction: column;
+            gap: 0.25rem;
+        }
+
+        .thankyou-container .contact-item-label {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+        }
+
+        .thankyou-container .contact-item-value {
+            font-size: 1.125rem;
+            color: var(--white);
+        }
+
+        .thankyou-container .contact-socials {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .thankyou-container .contact-socials a {
+            width: 45px;
+            height: 45px;
+            border: 1px solid var(--gray-700);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .thankyou-container .contact-socials a:hover {
+            border-color: var(--white);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .thankyou-container .contact-socials img {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .thankyou-container .contact-socials a:hover img {
+            opacity: 1;
+        }
+
+        .back-home-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-size: 0.875rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            text-decoration: none;
+            background: linear-gradient(135deg, var(--white) 0%, var(--gray-200) 100%);
+            color: var(--black);
+            transition: all 0.3s ease;
+            margin-top: 2rem;
+        }
+
+        .back-home-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.2);
+        }
+
+        @media (max-width: 968px) {
+            .thankyou-page {
+                padding: 8rem 2rem 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo">Brennan Keating</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="artwork.html">Artwork</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Thank You Section -->
+    <section class="thankyou-page">
+        <div class="thankyou-container">
+            <h1>Thank You</h1>
+            <p>We will be in contact with you soon.</p>
+
+            <div class="contact-details">
+                <div class="contact-item">
+                    <span class="contact-item-label">Location</span>
+                    <span class="contact-item-value">Available Worldwide</span>
+                </div>
+            </div>
+
+            <div class="contact-socials">
+                <a href="https://www.instagram.com/brennankeating" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <img src="images/social/instagram.webp" alt="Instagram">
+                </a>
+                <a href="https://www.youtube.com/@brennankeating" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                    <img src="images/social/youtube.webp" alt="YouTube">
+                </a>
+                <a href="https://www.linkedin.com/in/brennankeating/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <img src="images/social/linkedin.webp" alt="LinkedIn">
+                </a>
+            </div>
+
+            <a href="index.html" class="back-home-btn">Back to Home</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text">&copy; 2026 Brennan Keating. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>

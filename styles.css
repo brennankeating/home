@@ -682,13 +682,17 @@ nav.scrolled {
     min-height: 70vh;
     display: flex;
     align-items: flex-end;
-    padding: 8rem 4rem 4rem;
+    justify-content: center;
+    padding: 8rem 0 4rem;
     position: relative;
     background: linear-gradient(180deg, var(--gray-900) 0%, var(--black) 100%);
 }
 
 .project-hero-content {
-    max-width: 800px;
+    width: 100%;
+    max-width: 1400px;
+    padding: 0 4rem;
+    margin: 0 auto;
 }
 
 .project-meta {
@@ -1105,8 +1109,12 @@ footer {
     }
 
     .project-hero {
-        padding: 6rem 2rem 3rem;
+        padding: 6rem 0 3rem;
         min-height: 50vh;
+    }
+
+    .project-hero-content {
+        padding: 0 2rem;
     }
 
     .project-content {
