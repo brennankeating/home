@@ -339,25 +339,39 @@
         const heroFrames = document.querySelectorAll('.hero-frame');
         const totalFrames = heroFrames.length;
         let currentFrame = 0;
+        let targetFrame = 0;
+        let animationId = null;
 
         function updateHeroFrame() {
             const heroRect = heroSection.getBoundingClientRect();
             const heroHeight = heroSection.offsetHeight;
-            const scrollProgress = Math.max(0, Math.min(1, -heroRect.top / (heroHeight * 0.8)));
+            const viewportHeight = window.innerHeight;
 
-            const frameIndex = Math.min(
-                Math.floor(scrollProgress * totalFrames),
+            // Start animation as soon as user starts scrolling (from top of page)
+            const scrollStart = 0;
+            const scrollEnd = heroHeight * 0.7;
+            const scrolled = Math.max(0, -heroRect.top + viewportHeight * 0.1);
+            const scrollProgress = Math.max(0, Math.min(1, scrolled / scrollEnd));
+
+            targetFrame = Math.min(
+                Math.round(scrollProgress * (totalFrames - 1)),
                 totalFrames - 1
             );
 
-            if (frameIndex !== currentFrame) {
+            if (targetFrame !== currentFrame) {
                 heroFrames[currentFrame].classList.remove('active');
-                heroFrames[frameIndex].classList.add('active');
-                currentFrame = frameIndex;
+                heroFrames[targetFrame].classList.add('active');
+                currentFrame = targetFrame;
             }
         }
 
-        window.addEventListener('scroll', updateHeroFrame, { passive: true });
+        function onScroll() {
+            if (animationId) cancelAnimationFrame(animationId);
+            animationId = requestAnimationFrame(updateHeroFrame);
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('touchmove', onScroll, { passive: true });
         updateHeroFrame();
     </script>
 </body>
