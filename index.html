@@ -33,6 +33,7 @@
 
         <!-- Hero Image Sequence Animation -->
         <div class="hero-sequence">
+            <!-- Preloaded frames (1-10) -->
             <img src="images/hero/hero_0000_01.webp" class="hero-frame active" data-frame="1" alt="">
             <img src="images/hero/hero_0001_02.webp" class="hero-frame" data-frame="2" alt="">
             <img src="images/hero/hero_0002_03.webp" class="hero-frame" data-frame="3" alt="">
@@ -43,23 +44,24 @@
             <img src="images/hero/hero_0007_08.webp" class="hero-frame" data-frame="8" alt="">
             <img src="images/hero/hero_0008_09.webp" class="hero-frame" data-frame="9" alt="">
             <img src="images/hero/hero_0009_10.webp" class="hero-frame" data-frame="10" alt="">
-            <img src="images/hero/hero_0010_11.webp" class="hero-frame" data-frame="11" alt="">
-            <img src="images/hero/hero_0011_12.webp" class="hero-frame" data-frame="12" alt="">
-            <img src="images/hero/hero_0012_13.webp" class="hero-frame" data-frame="13" alt="">
-            <img src="images/hero/hero_0013_14.webp" class="hero-frame" data-frame="14" alt="">
-            <img src="images/hero/hero_0014_15.webp" class="hero-frame" data-frame="15" alt="">
-            <img src="images/hero/hero_0015_16.webp" class="hero-frame" data-frame="16" alt="">
-            <img src="images/hero/hero_0016_17.webp" class="hero-frame" data-frame="17" alt="">
-            <img src="images/hero/hero_0017_18.webp" class="hero-frame" data-frame="18" alt="">
-            <img src="images/hero/hero_0018_19.webp" class="hero-frame" data-frame="19" alt="">
-            <img src="images/hero/hero_0019_20.webp" class="hero-frame" data-frame="20" alt="">
-            <img src="images/hero/hero_0020_21.webp" class="hero-frame" data-frame="21" alt="">
-            <img src="images/hero/hero_0021_22.webp" class="hero-frame" data-frame="22" alt="">
-            <img src="images/hero/hero_0022_23.webp" class="hero-frame" data-frame="23" alt="">
-            <img src="images/hero/hero_0023_24.webp" class="hero-frame" data-frame="24" alt="">
-            <img src="images/hero/hero_0024_25.webp" class="hero-frame" data-frame="25" alt="">
-            <img src="images/hero/hero_0025_26.webp" class="hero-frame" data-frame="26" alt="">
-            <img src="images/hero/hero_0026_27.webp" class="hero-frame" data-frame="27" alt="">
+            <!-- Lazy loaded frames (11-27) -->
+            <img data-lazy-src="images/hero/hero_0010_11.webp" class="hero-frame" data-frame="11" alt="">
+            <img data-lazy-src="images/hero/hero_0011_12.webp" class="hero-frame" data-frame="12" alt="">
+            <img data-lazy-src="images/hero/hero_0012_13.webp" class="hero-frame" data-frame="13" alt="">
+            <img data-lazy-src="images/hero/hero_0013_14.webp" class="hero-frame" data-frame="14" alt="">
+            <img data-lazy-src="images/hero/hero_0014_15.webp" class="hero-frame" data-frame="15" alt="">
+            <img data-lazy-src="images/hero/hero_0015_16.webp" class="hero-frame" data-frame="16" alt="">
+            <img data-lazy-src="images/hero/hero_0016_17.webp" class="hero-frame" data-frame="17" alt="">
+            <img data-lazy-src="images/hero/hero_0017_18.webp" class="hero-frame" data-frame="18" alt="">
+            <img data-lazy-src="images/hero/hero_0018_19.webp" class="hero-frame" data-frame="19" alt="">
+            <img data-lazy-src="images/hero/hero_0019_20.webp" class="hero-frame" data-frame="20" alt="">
+            <img data-lazy-src="images/hero/hero_0020_21.webp" class="hero-frame" data-frame="21" alt="">
+            <img data-lazy-src="images/hero/hero_0021_22.webp" class="hero-frame" data-frame="22" alt="">
+            <img data-lazy-src="images/hero/hero_0022_23.webp" class="hero-frame" data-frame="23" alt="">
+            <img data-lazy-src="images/hero/hero_0023_24.webp" class="hero-frame" data-frame="24" alt="">
+            <img data-lazy-src="images/hero/hero_0024_25.webp" class="hero-frame" data-frame="25" alt="">
+            <img data-lazy-src="images/hero/hero_0025_26.webp" class="hero-frame" data-frame="26" alt="">
+            <img data-lazy-src="images/hero/hero_0026_27.webp" class="hero-frame" data-frame="27" alt="">
         </div>
 
         <div class="hero-content">
@@ -334,13 +336,42 @@
 
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-        // Hero Image Sequence Scroll Animation
+        // Hero Image Sequence Scroll Animation with Progressive Loading
         const heroSection = document.querySelector('.hero');
         const heroFrames = document.querySelectorAll('.hero-frame');
         const totalFrames = heroFrames.length;
         let currentFrame = 0;
         let targetFrame = 0;
         let animationId = null;
+        let loadedFrames = new Set();
+        const PRELOAD_BUFFER = 5; // Load this many frames ahead
+
+        // Mark initially loaded frames
+        heroFrames.forEach((frame, index) => {
+            if (frame.src && !frame.dataset.lazySrc) {
+                loadedFrames.add(index);
+            }
+        });
+
+        // Progressive frame loader
+        function loadFrame(index) {
+            if (index >= totalFrames || loadedFrames.has(index)) return;
+
+            const frame = heroFrames[index];
+            const lazySrc = frame.dataset.lazySrc;
+
+            if (lazySrc && !frame.src) {
+                frame.src = lazySrc;
+                loadedFrames.add(index);
+            }
+        }
+
+        // Preload frames ahead of current position
+        function preloadAhead(fromIndex) {
+            for (let i = fromIndex; i <= Math.min(fromIndex + PRELOAD_BUFFER, totalFrames - 1); i++) {
+                loadFrame(i);
+            }
+        }
 
         function updateHeroFrame() {
             const heroRect = heroSection.getBoundingClientRect();
@@ -348,7 +379,6 @@
             const viewportHeight = window.innerHeight;
 
             // Start animation as soon as user starts scrolling (from top of page)
-            const scrollStart = 0;
             const scrollEnd = heroHeight * 0.7;
             const scrolled = Math.max(0, -heroRect.top + viewportHeight * 0.1);
             const scrollProgress = Math.max(0, Math.min(1, scrolled / scrollEnd));
@@ -357,6 +387,9 @@
                 Math.round(scrollProgress * (totalFrames - 1)),
                 totalFrames - 1
             );
+
+            // Preload frames ahead of target
+            preloadAhead(targetFrame);
 
             if (targetFrame !== currentFrame) {
                 heroFrames[currentFrame].classList.remove('active');

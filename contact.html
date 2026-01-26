@@ -103,15 +103,16 @@
             background: rgba(255, 255, 255, 0.05);
         }
 
-        .contact-socials svg {
-            width: 18px;
-            height: 18px;
-            fill: var(--gray-400);
-            transition: fill 0.3s ease;
+        .contact-socials img {
+            width: 22px;
+            height: 22px;
+            object-fit: contain;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
         }
 
-        .contact-socials a:hover svg {
-            fill: var(--white);
+        .contact-socials a:hover img {
+            opacity: 1;
         }
 
         /* Form Styles */
@@ -268,30 +269,14 @@
                 </div>
 
                 <div class="contact-socials">
-                    <a href="#" aria-label="Instagram">
-                        <svg viewBox="0 0 24 24">
-                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="currentColor" stroke-width="2"/>
-                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="currentColor" stroke-width="2"/>
-                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="currentColor" stroke-width="2"/>
-                        </svg>
+                    <a href="https://www.instagram.com/brennankeating" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                        <img src="images/social/instagram.webp" alt="Instagram">
                     </a>
-                    <a href="#" aria-label="Behance">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M22 7h-7v2h7V7zM8.5 7C10.433 7 12 8.567 12 10.5c0 .89-.36 1.699-.94 2.29A3.5 3.5 0 0 1 8.5 17H1V4h7.5C9.881 4 11 5.119 11 6.5S9.881 9 8.5 9H4V7h4.5zM4 11v4h4.5a2 2 0 1 0 0-4H4zm14.5 0c1.933 0 3.5 1.567 3.5 3.5S20.433 18 18.5 18c-1.933 0-3.5-1.567-3.5-3.5S16.567 11 18.5 11zm0 2a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
-                        </svg>
+                    <a href="https://www.youtube.com/@brennankeating" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                        <img src="images/social/youtube.webp" alt="YouTube">
                     </a>
-                    <a href="#" aria-label="LinkedIn">
-                        <svg viewBox="0 0 24 24">
-                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                            <rect x="2" y="9" width="4" height="12"/>
-                            <circle cx="4" cy="4" r="2"/>
-                        </svg>
-                    </a>
-                    <a href="#" aria-label="Dribbble">
-                        <svg viewBox="0 0 24 24">
-                            <circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/>
-                            <path d="M8.56 2.75c4.37 6.03 6.02 9.42 8.03 17.72m2.54-15.38c-3.72 4.35-8.94 5.66-16.88 5.85m19.5 1.9c-3.5-.93-6.63-.82-8.94 0-2.58.92-5.01 2.86-7.44 6.32" fill="none" stroke="currentColor" stroke-width="2"/>
-                        </svg>
+                    <a href="https://www.linkedin.com/in/brennankeating/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                        <img src="images/social/linkedin.webp" alt="LinkedIn">
                     </a>
                 </div>
             </div>
