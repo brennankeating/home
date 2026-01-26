@@ -21,7 +21,7 @@
     --gray-700: #404040;
     --gray-800: #262626;
     --gray-900: #171717;
-    --font-headline: "new-spirit", serif;
+    --font-headline: "articulat-heavy-cf", sans-serif;
 }
 
 html {
@@ -62,7 +62,7 @@ nav.scrolled {
 .logo {
     font-family: var(--font-headline);
     font-size: 1.5rem;
-    font-weight: 700;
+    font-weight: 900;
     letter-spacing: 0.02em;
     text-decoration: none;
     color: var(--white);
@@ -212,7 +212,7 @@ nav.scrolled {
 .hero-title {
     font-family: var(--font-headline);
     font-size: clamp(2.5rem, 6vw, 5rem);
-    font-weight: 700;
+    font-weight: 900;
     line-height: 1.1;
     margin-bottom: 2rem;
     background: linear-gradient(
@@ -369,7 +369,7 @@ nav.scrolled {
 .section-title {
     font-family: var(--font-headline);
     font-size: clamp(2rem, 5vw, 3.5rem);
-    font-weight: 700;
+    font-weight: 900;
     background: linear-gradient(135deg, var(--white) 0%, var(--gray-400) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -436,6 +436,7 @@ nav.scrolled {
 .about-card h3 {
     font-family: var(--font-headline);
     font-size: 1.25rem;
+    font-weight: 900;
     margin-bottom: 1rem;
     color: var(--white);
 }
@@ -514,7 +515,7 @@ nav.scrolled {
 .featured-title {
     font-family: var(--font-headline);
     font-size: 1.5rem;
-    font-weight: 600;
+    font-weight: 900;
     color: var(--white);
     margin-bottom: 0.5rem;
 }
@@ -567,7 +568,7 @@ nav.scrolled {
 .page-title {
     font-family: var(--font-headline);
     font-size: clamp(3rem, 8vw, 6rem);
-    font-weight: 700;
+    font-weight: 900;
     background: linear-gradient(135deg, var(--white) 0%, var(--gray-400) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -678,7 +679,7 @@ nav.scrolled {
 .project-title {
     font-family: var(--font-headline);
     font-size: 1.25rem;
-    font-weight: 600;
+    font-weight: 900;
     color: var(--white);
     margin-bottom: 0.75rem;
 }
@@ -734,7 +735,7 @@ nav.scrolled {
 .project-hero-title {
     font-family: var(--font-headline);
     font-size: clamp(2.5rem, 6vw, 5rem);
-    font-weight: 700;
+    font-weight: 900;
     line-height: 1.1;
     background: linear-gradient(135deg, var(--white) 0%, var(--gray-400) 100%);
     -webkit-background-clip: text;
@@ -798,6 +799,22 @@ nav.scrolled {
     max-height: 80vh;
     object-fit: cover;
     object-position: center center;
+}
+
+.gallery-full .gallery-item video {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    object-position: center center;
+    display: block;
+}
+
+/* Vertically center wide-angle videos in gallery containers */
+.gallery-full .gallery-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--black);
 }
 
 .gallery-half {
@@ -898,7 +915,7 @@ nav.scrolled {
 .contact-title {
     font-family: var(--font-headline);
     font-size: clamp(2rem, 5vw, 4rem);
-    font-weight: 700;
+    font-weight: 900;
     margin-bottom: 1.5rem;
     background: linear-gradient(135deg, var(--white) 0%, var(--gray-400) 100%);
     -webkit-background-clip: text;
@@ -1114,6 +1131,16 @@ footer {
         padding: 2rem;
         flex-direction: column;
         text-align: center;
+    }
+
+    /* Mobile video centering - remove extra space below */
+    .gallery-full .gallery-item {
+        max-height: none;
+    }
+
+    .gallery-full .gallery-item video {
+        width: 100%;
+        height: auto;
     }
 }
 
