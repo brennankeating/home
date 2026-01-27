@@ -19,7 +19,9 @@
         .contact-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 6rem;
+            grid-template-rows: 1fr auto;
+            gap: 6rem 6rem;
+            row-gap: 2rem;
             max-width: 1200px;
             width: 100%;
         }
@@ -85,7 +87,9 @@
         .contact-socials {
             display: flex;
             gap: 1rem;
-            margin-top: 2rem;
+            grid-column: 1;
+            grid-row: 2;
+            align-self: start;
         }
 
         .contact-socials a {
@@ -120,6 +124,8 @@
             background: linear-gradient(135deg, var(--gray-900) 0%, var(--black) 100%);
             border: 1px solid var(--gray-800);
             padding: 3rem;
+            grid-column: 2;
+            grid-row: 1;
         }
 
         .contact-form {
@@ -195,7 +201,7 @@
         @media (max-width: 968px) {
             .contact-container {
                 grid-template-columns: 1fr;
-                gap: 4rem;
+                gap: 3rem;
             }
 
             .contact-page {
@@ -204,10 +210,19 @@
 
             .contact-form-wrapper {
                 padding: 2rem;
+                grid-column: auto;
+                grid-row: auto;
             }
 
             .form-row {
                 grid-template-columns: 1fr;
+            }
+
+            .contact-socials {
+                grid-column: auto;
+                grid-row: auto;
+                justify-content: center;
+                margin-top: 0;
             }
         }
     </style>
@@ -243,17 +258,6 @@
                     </div>
                 </div>
 
-                <div class="contact-socials">
-                    <a href="https://www.instagram.com/brennankeating" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                        <img src="../images/social/instagram.webp" alt="Instagram">
-                    </a>
-                    <a href="https://www.youtube.com/@brennankeating" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-                        <img src="../images/social/youtube.webp" alt="YouTube">
-                    </a>
-                    <a href="https://www.linkedin.com/in/brennankeating/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                        <img src="../images/social/linkedin.webp" alt="LinkedIn">
-                    </a>
-                </div>
             </div>
 
             <div class="contact-form-wrapper">
@@ -279,6 +283,18 @@
                     </div>
                     <button type="submit" class="submit-btn">Send Message</button>
                 </form>
+            </div>
+
+            <div class="contact-socials">
+                <a href="https://www.instagram.com/brennankeating" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                    <img src="../images/social/instagram.webp" alt="Instagram">
+                </a>
+                <a href="https://www.youtube.com/@brennankeating" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+                    <img src="../images/social/youtube.webp" alt="YouTube">
+                </a>
+                <a href="https://www.linkedin.com/in/brennankeating/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    <img src="../images/social/linkedin.webp" alt="LinkedIn">
+                </a>
             </div>
         </div>
     </section>
