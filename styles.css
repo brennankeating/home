@@ -1122,13 +1122,22 @@ footer {
     }
 
     .project-nav {
-        flex-direction: column;
-        gap: 2rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
         padding: 2rem;
     }
 
-    .project-nav .next {
+    .project-nav a {
+        padding: 1rem 0;
+    }
+
+    .project-nav .prev {
         text-align: left;
+    }
+
+    .project-nav .next {
+        text-align: right;
     }
 
     footer {
