@@ -1,0 +1,6 @@
+# Robots.txt for brennankeating.com
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://brennankeating.com/sitemap.xml
