@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | Brennan Keating</title>
+    <meta name="description" content="Digital products and resources by Brennan Keating — graphic design assets, templates, and more.">
+    <meta name="keywords" content="digital products, design assets, templates, graphic design resources, Brennan Keating">
+    <meta name="author" content="Brennan Keating">
+    <meta property="og:title" content="Products | Brennan Keating">
+    <meta property="og:description" content="Digital products and resources by Brennan Keating.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://brennankeating.com/products/">
+    <link rel="canonical" href="https://brennankeating.com/products/">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="stylesheet" href="https://use.typekit.net/qen5jnd.css">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        /* Products Page Specific Styles */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            padding: 0 4rem 8rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            position: relative;
+            border: 1px solid var(--gray-800);
+            transition: border-color 0.3s ease, transform 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            background: var(--gray-900);
+        }
+
+        .product-card:hover {
+            border-color: var(--gray-600);
+            transform: translateY(-5px);
+        }
+
+        .product-thumbnail {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+            background: var(--gray-800);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-thumbnail-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .product-thumbnail-placeholder svg {
+            width: 48px;
+            height: 48px;
+            stroke: var(--gray-600);
+            stroke-width: 1;
+            fill: none;
+        }
+
+        .product-info {
+            padding: 1.25rem 1.25rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            flex: 1;
+        }
+
+        .product-category {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+        }
+
+        .product-name {
+            font-family: var(--font-headline);
+            font-size: 1rem;
+            font-weight: 900;
+            letter-spacing: 0.02em;
+            color: var(--gray-300);
+            text-transform: uppercase;
+        }
+
+        .product-description {
+            font-size: 0.8rem;
+            color: var(--gray-500);
+            line-height: 1.5;
+            flex: 1;
+        }
+
+        .product-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gray-800);
+        }
+
+        .product-price {
+            font-family: var(--font-headline);
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: var(--gray-400);
+            letter-spacing: 0.05em;
+        }
+
+        .product-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gray-400);
+            border: 1px solid var(--gray-700);
+            text-decoration: none;
+            cursor: not-allowed;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        a.product-btn {
+            cursor: pointer;
+        }
+
+        a.product-btn:hover {
+            color: var(--gray-200);
+            border-color: var(--gray-400);
+        }
+
+        .product-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-coming-soon-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(0, 0, 0, 0.75);
+            border: 1px solid var(--gray-700);
+            padding: 0.3rem 0.6rem;
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gray-400);
+        }
+
+        @media (max-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                padding: 0 2rem 5rem;
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="../" class="logo">Brennan Keating</a>
+        <ul class="nav-links">
+            <li><a href="../">Home</a></li>
+            <li><a href="../projects/">Projects</a></li>
+            <li><a href="../artwork/">Artwork</a></li>
+            <li><a href="../products/">Products</a></li>
+            <li><a href="../contact/">Contact</a></li>
+        </ul>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1 class="page-title">Products</h1>
+        <p class="page-subtitle">Digital products, design assets, and resources. More coming soon.</p>
+    </header>
+
+    <!-- Products Grid -->
+    <section class="products-grid" id="products-grid">
+
+        <!-- Placeholder cards shown until polar-products.json loads -->
+        <div class="product-card">
+            <div class="product-thumbnail">
+                <div class="product-thumbnail-placeholder">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                </div>
+                <span class="product-coming-soon-badge">Coming Soon</span>
+            </div>
+            <div class="product-info">
+                <p class="product-category">Font</p>
+                <h2 class="product-name">Product 01</h2>
+                <p class="product-description">Description coming soon. Check back for updates.</p>
+                <div class="product-footer">
+                    <span class="product-price">—</span>
+                    <span class="product-btn">Coming Soon</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-thumbnail">
+                <div class="product-thumbnail-placeholder">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                </div>
+                <span class="product-coming-soon-badge">Coming Soon</span>
+            </div>
+            <div class="product-info">
+                <p class="product-category">Font</p>
+                <h2 class="product-name">Product 02</h2>
+                <p class="product-description">Description coming soon. Check back for updates.</p>
+                <div class="product-footer">
+                    <span class="product-price">—</span>
+                    <span class="product-btn">Coming Soon</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="product-card">
+            <div class="product-thumbnail">
+                <div class="product-thumbnail-placeholder">
+                    <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                </div>
+                <span class="product-coming-soon-badge">Coming Soon</span>
+            </div>
+            <div class="product-info">
+                <p class="product-category">Font</p>
+                <h2 class="product-name">Product 03</h2>
+                <p class="product-description">Description coming soon. Check back for updates.</p>
+                <div class="product-footer">
+                    <span class="product-price">—</span>
+                    <span class="product-btn">Coming Soon</span>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text">&copy; 2026 Brennan Keating. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            nav.classList.toggle('scrolled', window.scrollY > 100);
+        });
+
+        // Fade in product cards on scroll
+        function initFadeIn() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 50);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+            document.querySelectorAll('.product-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease';
+                observer.observe(card);
+            });
+        }
+
+        // Polar products dynamic loading
+        function escapeHtml(str) {
+            return String(str || '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        function formatPrice(amount, currency) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: currency || 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2,
+            }).format(amount / 100);
+        }
+
+        function renderProductCard(product) {
+            const thumb = product.image
+                ? `<img src="${escapeHtml(product.image)}" alt="${escapeHtml(product.name)}" loading="lazy">`
+                : `<div class="product-thumbnail-placeholder">
+                       <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+                   </div>`;
+
+            const priceStr = product.price > 0
+                ? formatPrice(product.price, product.currency)
+                : 'Free';
+
+            const btn = product.checkoutUrl
+                ? `<a href="${escapeHtml(product.checkoutUrl)}" class="product-btn" target="_blank" rel="noopener noreferrer">
+                       Buy Now
+                       <svg viewBox="0 0 24 24" width="11" height="11" stroke="currentColor" stroke-width="2" fill="none"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                   </a>`
+                : `<span class="product-btn">Coming Soon</span>`;
+
+            return `
+                <div class="product-card">
+                    <div class="product-thumbnail">${thumb}</div>
+                    <div class="product-info">
+                        <p class="product-category">${escapeHtml(product.category || 'Font')}</p>
+                        <h2 class="product-name">${escapeHtml(product.name)}</h2>
+                        <p class="product-description">${escapeHtml(product.description || 'No description available.')}</p>
+                        <div class="product-footer">
+                            <span class="product-price">${escapeHtml(priceStr)}</span>
+                            ${btn}
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        async function loadProducts() {
+            const grid = document.getElementById('products-grid');
+            try {
+                const res = await fetch('./polar-products.json');
+                if (!res.ok) throw new Error('not found');
+                const products = await res.json();
+                if (products.length > 0) {
+                    grid.innerHTML = products.map(renderProductCard).join('');
+                }
+                // if empty array, placeholder cards remain
+            } catch {
+                // polar-products.json missing or empty — placeholder cards remain
+            }
+            initFadeIn();
+        }
+
+        loadProducts();
+    </script>
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Brennan Keating Products",
+        "description": "Digital products and design resources by Brennan Keating.",
+        "url": "https://brennankeating.com/products/",
+        "author": {
+            "@type": "Person",
+            "name": "Brennan Keating"
+        }
+    }
+    </script>
+</body>
+</html>
