@@ -1,10 +1,40 @@
 [
   {
+    "id": "20a6a559-9284-46b0-9d99-58c1ffeddc9c",
+    "name": "BK AMOEBA",
+    "description": "Purchase includes a downloadable .OTF font file.",
+    "category": "Font",
+    "price": 2000,
+    "currency": "USD",
+    "image": "https://polar-public-files.s3.amazonaws.com/product_media/9a7c7b44-1fd7-4a9d-9f2e-eb056fec5c98/9dfaef47-42ab-4c49-b472-101fedc35e7b/bk-amoeba.png",
+    "checkoutUrl": "https://buy.polar.sh/polar_cl_jTzDwHuV243EzgkOOscmI6JK6mAsUqSZ92Xb5255X1i"
+  },
+  {
+    "id": "1829a356-1e17-4448-9fa0-b9c605a05894",
+    "name": "BK OPTIC",
+    "description": "Purchase includes a downloadable .OTF font file.",
+    "category": "Font",
+    "price": 2000,
+    "currency": "USD",
+    "image": "https://polar-public-files.s3.amazonaws.com/product_media/9a7c7b44-1fd7-4a9d-9f2e-eb056fec5c98/27671631-3780-46c8-a720-734a62108ea1/bk-optic.png",
+    "checkoutUrl": "https://buy.polar.sh/polar_cl_h0mpwuiDiA3lTT4mJjp5D2WukyUoHDPwgzvpF07QKjc"
+  },
+  {
+    "id": "26ccf7d1-034a-438c-a019-f53eb7368717",
+    "name": "BK SPACIOUS",
+    "description": "Purchase includes a downloadable .OTF font file.",
+    "category": "Font",
+    "price": 2000,
+    "currency": "USD",
+    "image": "https://polar-public-files.s3.amazonaws.com/product_media/9a7c7b44-1fd7-4a9d-9f2e-eb056fec5c98/095e2ef7-1937-4474-a4d7-00432f24b1a4/bk-spacious.png",
+    "checkoutUrl": "https://buy.polar.sh/polar_cl_nygNaxmI7y9TZRdDx5OWOtXZpO5vjXJyPHB4H24v63p"
+  },
+  {
     "id": "f5b9def6-b83a-44d9-8bdd-791722980dae",
     "name": "BK WRONG SHAPE",
     "description": "Purchase includes a downloadable .OTF font file.",
     "category": "Font",
-    "price": 1000,
+    "price": 2000,
     "currency": "USD",
     "image": "https://polar-public-files.s3.amazonaws.com/product_media/9a7c7b44-1fd7-4a9d-9f2e-eb056fec5c98/61f3a3d3-17ad-4b17-88ad-f155bce20829/project-05-02.webp",
     "checkoutUrl": "https://buy.polar.sh/polar_cl_e2oAtEMyrtDhNdUVPrGHQkyKSeBv87ecDnn6006RBOn"
@@ -14,7 +44,7 @@
     "name": "BK DIRTY DEVIL",
     "description": "Purchase includes a downloadable .OTF font file.",
     "category": "Font",
-    "price": 1000,
+    "price": 2000,
     "currency": "USD",
     "image": "https://polar-public-files.s3.amazonaws.com/product_media/9a7c7b44-1fd7-4a9d-9f2e-eb056fec5c98/eb7602b7-9b61-4110-a4c0-5366a53f537c/project-05-11.webp",
     "checkoutUrl": "https://buy.polar.sh/polar_cl_Vgl540Q9IKT2Usmg5xswKpEE4bS3IeTPNU5si0qiJuc"
@@ -24,7 +54,7 @@
     "name": "BK FUTURE BASS",
     "description": "Purchase includes a downloadable .OTF font file.",
     "category": "Font",
-    "price": 1000,
+    "price": 2000,
     "currency": "USD",
     "image": "https://polar-public-files.s3.amazonaws.com/product_media/9a7c7b44-1fd7-4a9d-9f2e-eb056fec5c98/be10a6dc-9b05-44e5-8f18-263d1e156509/project-05-05.webp",
     "checkoutUrl": "https://buy.polar.sh/polar_cl_kELBgUP9OSbzSEoZ2mzluNsn4FqMF14N4nmB21EoVML"
@@ -34,7 +64,7 @@
     "name": "BK VCR",
     "description": "Purchase includes a downloadable .OTF font file.",
     "category": "Font",
-    "price": 1000,
+    "price": 2000,
     "currency": "USD",
     "image": "https://polar-public-files.s3.amazonaws.com/product_media/9a7c7b44-1fd7-4a9d-9f2e-eb056fec5c98/64fe1411-a390-4010-8cc6-23de424c1d1c/project-05-07.webp",
     "checkoutUrl": "https://buy.polar.sh/polar_cl_qTfpEqtlfqjyiaP3eZZLfvxLy3IBv901RkyI54CqoH4"
@@ -44,7 +74,7 @@
     "name": "BK DR EVIL",
     "description": "Purchase includes a downloadable .OTF font file.",
     "category": "Font",
-    "price": 1000,
+    "price": 2000,
     "currency": "USD",
     "image": "https://polar-public-files.s3.amazonaws.com/product_media/9a7c7b44-1fd7-4a9d-9f2e-eb056fec5c98/fe313a06-de39-45e3-aa3d-720ab31a3018/project-05-12.webp",
     "checkoutUrl": "https://buy.polar.sh/polar_cl_b8djEMqOxq4GVFY1ibFWotGIDow6YYypLuo6T1DLrj0"
@@ -54,7 +84,7 @@
     "name": "BK BOLD AND BRAVE",
     "description": "Purchase includes a downloadable .OTF font file.",
     "category": "Font",
-    "price": 1000,
+    "price": 2000,
     "currency": "USD",
     "image": "https://polar-public-files.s3.amazonaws.com/product_media/9a7c7b44-1fd7-4a9d-9f2e-eb056fec5c98/e4021ed0-8cf3-45ed-b4ec-77cf3e1b9146/boldandbrave.png",
     "checkoutUrl": "https://buy.polar.sh/polar_cl_45CX77s5gZjYdYSbaaRJRiT2PXw05JVXnpEqF4K79oB"
