@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POS Systems | Brennan Keating</title>
+    <meta name="description" content="POS system pricing comparison — monthly software costs, processing fees, features, and business category recommendations.">
+    <meta name="author" content="Brennan Keating">
+    <meta property="og:title" content="POS Systems | Brennan Keating">
+    <meta property="og:description" content="POS system pricing comparison — monthly software costs, processing fees, features, and business category recommendations.">
+    <meta property="og:type" content="website">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="stylesheet" href="https://use.typekit.net/qen5jnd.css">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        /* ── POS Systems Page ── */
+
+        /* Filter Bar */
+        .filter-bar {
+            padding: 0 4rem 2.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .filter-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--gray-600);
+        }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .filter-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.4rem 0.9rem;
+            font-size: 0.65rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            border: 1px solid var(--gray-800);
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+            font-family: inherit;
+        }
+
+        .filter-btn:hover {
+            color: var(--gray-300);
+            border-color: var(--gray-600);
+        }
+
+        .filter-btn.active {
+            color: var(--gray-100);
+            border-color: var(--gray-400);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        /* Table Wrapper */
+        .pos-table-wrap {
+            padding: 0 4rem 8rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            overflow-x: auto;
+        }
+
+        .pos-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.78rem;
+            table-layout: fixed;
+        }
+
+        .pos-table thead th {
+            font-family: var(--font-headline);
+            font-size: 0.6rem;
+            font-weight: 900;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            padding: 0 1rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--gray-800);
+            white-space: nowrap;
+        }
+
+        .pos-table thead th:first-child {
+            padding-left: 0;
+        }
+
+        /* Column widths */
+        .pos-table col.col-name     { width: 11%; }
+        .pos-table col.col-best     { width: 18%; }
+        .pos-table col.col-cost     { width: 18%; }
+        .pos-table col.col-fees     { width: 15%; }
+        .pos-table col.col-features { width: 22%; }
+        .pos-table col.col-notes    { width: 16%; }
+
+        .pos-table tbody tr {
+            border-bottom: 1px solid var(--gray-900);
+            transition: background 0.15s ease, opacity 0.35s ease, transform 0.35s ease;
+        }
+
+        .pos-table tbody tr:hover {
+            background: rgba(255, 255, 255, 0.025);
+        }
+
+        .pos-table tbody tr.hidden-row {
+            display: none;
+        }
+
+        .pos-table tbody td {
+            padding: 1.1rem 1rem;
+            vertical-align: top;
+            color: var(--gray-400);
+            line-height: 1.55;
+            border-bottom: 1px solid var(--gray-900);
+        }
+
+        .pos-table tbody td:first-child {
+            padding-left: 0;
+        }
+
+        .pos-name {
+            font-family: var(--font-headline);
+            font-size: 0.85rem;
+            font-weight: 900;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--gray-200);
+        }
+
+        .pos-cost-line {
+            display: block;
+            color: var(--gray-300);
+        }
+
+        .pos-cost-sub {
+            display: block;
+            color: var(--gray-600);
+            font-size: 0.72rem;
+        }
+
+        td[data-label="Processing Fees"] .pos-cost-line {
+            margin-bottom: 0.4rem;
+        }
+
+        /* No results message */
+        .no-results {
+            display: none;
+            padding: 3rem 0;
+            text-align: center;
+            color: var(--gray-600);
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .no-results.visible {
+            display: block;
+        }
+
+        /* ── Mobile Cards ── */
+        @media (max-width: 900px) {
+            .filter-bar,
+            .pos-table-wrap {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+
+            .pos-table-wrap {
+                overflow-x: visible;
+            }
+
+            .pos-table,
+            .pos-table thead,
+            .pos-table tbody,
+            .pos-table tr,
+            .pos-table td,
+            .pos-table th {
+                display: block;
+            }
+
+            .pos-table thead {
+                display: none;
+            }
+
+            .pos-table tbody tr {
+                border: 1px solid var(--gray-800);
+                margin-bottom: 1rem;
+                padding: 1.25rem;
+                background: var(--gray-900);
+            }
+
+            .pos-table tbody tr:hover {
+                background: var(--gray-900);
+            }
+
+            .pos-table tbody td {
+                padding: 0.35rem 0;
+                border-bottom: none;
+            }
+
+            .pos-table tbody td:first-child {
+                padding-left: 0;
+                margin-bottom: 0.5rem;
+            }
+
+            .pos-table tbody td[data-label]::before {
+                content: attr(data-label);
+                display: block;
+                font-size: 0.55rem;
+                letter-spacing: 0.18em;
+                text-transform: uppercase;
+                color: var(--gray-600);
+                margin-bottom: 0.2rem;
+            }
+
+            .pos-table tbody td:first-child[data-label]::before {
+                display: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .page-header {
+                padding-top: 6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="../" class="logo">Brennan Keating</a>
+        <ul class="nav-links">
+            <li><a href="../">Home</a></li>
+            <li><a href="../projects/">Projects</a></li>
+            <li><a href="../artwork/">Artwork</a></li>
+            <li><a href="../products/">Products</a></li>
+            <li><a href="../services/">Services</a></li>
+            <li><a href="../contact/">Contact</a></li>
+        </ul>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <header class="page-header">
+        <h1 class="page-title">POS Systems</h1>
+        <p class="page-subtitle">Point-of-sale system comparison: software costs, processing fees, and key features by business type.</p>
+    </header>
+
+    <!-- Filter Bar -->
+    <div class="filter-bar" id="filter-bar">
+        <span class="filter-label">Filter by:</span>
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="Retail">Retail</button>
+            <button class="filter-btn" data-filter="E-commerce">E-commerce</button>
+            <button class="filter-btn" data-filter="Travel and Hospitality">Travel &amp; Hospitality</button>
+            <button class="filter-btn" data-filter="Food and Beverage">Food &amp; Beverage</button>
+            <button class="filter-btn" data-filter="Healthcare">Healthcare</button>
+            <button class="filter-btn" data-filter="Utilities and Government">Utilities &amp; Government</button>
+            <button class="filter-btn" data-filter="Education">Education</button>
+            <button class="filter-btn" data-filter="B2B">B2B</button>
+            <button class="filter-btn" data-filter="Real Estate">Real Estate</button>
+            <button class="filter-btn" data-filter="Fintech and Digital Platforms">Fintech &amp; Digital</button>
+            <button class="filter-btn" data-filter="SaaS">SaaS</button>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="pos-table-wrap">
+        <table class="pos-table" id="pos-table">
+            <colgroup>
+                <col class="col-name">
+                <col class="col-best">
+                <col class="col-cost">
+                <col class="col-fees">
+                <col class="col-features">
+                <col class="col-notes">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>Platform</th>
+                    <th>Best For</th>
+                    <th>Monthly Software Cost</th>
+                    <th>Processing Fees</th>
+                    <th>Key Features</th>
+                    <th>Notes / Drawbacks</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <!-- Accept.blue -->
+                <tr data-categories="B2B,Fintech and Digital Platforms,SaaS,Healthcare">
+                    <td data-label="Platform">
+                        <span class="pos-name">Accept.blue</span>
+                    </td>
+                    <td data-label="Best For">Merchants needing secure gateway</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">$20 monthly</span>
+                        <span class="pos-cost-sub">$0.10 per transaction</span>
+                        <span class="pos-cost-line">$50 setup fee (one time)</span>
+                    </td>
+                    <td data-label="Processing Fees">
+                        <span class="pos-cost-line">Surcharge ~3% on credit; 0% on debit</span>
+                        <span class="pos-cost-line">Dual Pricing ~4% on credit &amp; debit</span>
+                        <span class="pos-cost-line">Interchange Pricing</span>
+                    </td>
+                    <td data-label="Key Features">3D Secure, recurring payments, ACH/check processing, integrations, integrates with equinox terminals</td>
+                    <td data-label="Notes">User friendly design; strong for fraud protection; integrates with only two hardware terminals</td>
+                </tr>
+
+                <!-- Authorize.net -->
+                <tr data-categories="B2B,E-commerce,Fintech and Digital Platforms,SaaS,Healthcare">
+                    <td data-label="Platform">
+                        <span class="pos-name">Authorize.net</span>
+                    </td>
+                    <td data-label="Best For">E-commerce, B2B, card-not-present &amp; recurring billing</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">$20 monthly</span>
+                        <span class="pos-cost-sub">$0.10 per transaction</span>
+                        <span class="pos-cost-sub">$0.10 per batch</span>
+                    </td>
+                    <td data-label="Processing Fees">
+                        <span class="pos-cost-line">Surcharge ~3% on credit; 0% on debit</span>
+                        <span class="pos-cost-line">Dual Pricing ~4% on credit &amp; debit</span>
+                        <span class="pos-cost-line">Interchange Pricing</span>
+                    </td>
+                    <td data-label="Key Features">Virtual terminal, recurring billing, Advanced Fraud Detection Suite, ACH/e-check, mobile payments, customer profiles, developer APIs</td>
+                    <td data-label="Notes">Gateway-only (not full POS); requires separate merchant account; long-standing, widely integrated; owned by Visa</td>
+                </tr>
+                
+                <!-- Biller Genie -->
+                <tr data-categories="B2B,Fintech and Digital Platforms,SaaS">
+                    <td data-label="Platform">
+                        <span class="pos-name">Biller Genie</span>
+                    </td>
+                    <td data-label="Best For">B2B businesses needing AR automation and invoice collections</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">$44.95 monthly</span>
+                        <span class="pos-cost-sub">$0.10 per transaction</span>
+                    </td>
+                    <td data-label="Processing Fees">
+                        <span class="pos-cost-line">Surcharge ~3% on credit; 0% on debit</span>
+                        <span class="pos-cost-line">Dual Pricing ~4% on credit &amp; debit</span>
+                        <span class="pos-cost-line">Interchange Pricing</span>
+                    </td>
+                    <td data-label="Key Features">Automated invoicing, payment reminders, ACH &amp; credit card payments, QuickBooks/accounting integrations, collections automation, customer payment portal</td>
+                    <td data-label="Notes">Software only, no hardware; AR automation platform; integrates with Quickbooks Online</td>
+                </tr>
+
+                <!-- BenjiPays -->
+                <tr data-categories="B2B,Fintech and Digital Platforms,SaaS">
+                    <td data-label="Platform">
+                        <span class="pos-name">BenjiPays</span>
+                    </td>
+                    <td data-label="Best For">Small to medium-sized businesses that use QuickBooks for invoicing</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">Inquire within</span>
+                    </td>
+                    <td data-label="Processing Fees">
+                        <span class="pos-cost-line">Surcharge ~3% on credit; 0% on debit</span>
+                        <span class="pos-cost-line">Dual Pricing ~4% on credit &amp; debit</span>
+                        <span class="pos-cost-line">Interchange Pricing</span>
+                    </td>
+                    <td data-label="Key Features">Automated invoicing, payment reminders, ACH &amp; credit card payments, QuickBooks/accounting integrations, collections automation, customer payment portal</td>
+                    <td data-label="Notes">Software only, no hardware; integrates with Quickbooks Online and Quickbooks Desktop.</td>
+                </tr>
+
+                <!-- CashierLive -->
+                <tr data-categories="Healthcare,Retail">
+                    <td data-label="Platform">
+                        <span class="pos-name">CashierLive</span>
+                    </td>
+                    <td data-label="Best For">Independent pharmacies, retail stores (Cloud POS)</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">Inquire within</span>
+                    </td>
+                    <td data-label="Processing Fees">
+                        <span class="pos-cost-line">Surcharge ~3% on credit; 0% on debit</span>
+                        <span class="pos-cost-line">Dual Pricing ~4% on credit &amp; debit</span>
+                        <span class="pos-cost-line">Interchange Pricing</span>
+                    </td>
+                    <td data-label="Key Features">Cloud-based, iOS app access, CRM/loyalty, reporting dashboard, hardware sync (printers/drawers)</td>
+                    <td data-label="Notes">Retail/pharmacy niche, remote management, dedicated support included</td>
+                </tr>
+
+                <!-- Clover -->
+                <tr data-categories="Retail,Food and Beverage,Travel and Hospitality">
+                    <td data-label="Platform">
+                        <span class="pos-name">Clover</span>
+                    </td>
+                    <td data-label="Best For">Retail, restaurants, services (flexible hardware)</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">$0 (Payments Only)</span>
+                        <span class="pos-cost-sub">No POS tools, just payment acceptance</span>
+                        <span class="pos-cost-line">$14.95 (Essentials)</span>
+                        <span class="pos-cost-sub">Basic POS features, tips, employee permissions</span>
+                        <span class="pos-cost-line">$59.95 (Counter Service)</span>
+                        <span class="pos-cost-sub">Online ordering, line-busting, tips, reporting</span>
+                        <span class="pos-cost-line">$84.95 (Retail Growth)</span>
+                        <span class="pos-cost-sub">Inventory tracking, loyalty, exchanges/returns</span>
+                        <span class="pos-cost-line">$89.95 (Retail Growth)</span>
+                        <span class="pos-cost-sub">Floor plans, server-specific tips, QR ordering, bar tabs</span>
+                    </td>
+                    <td data-label="Processing Fees">
+                        <span class="pos-cost-line">Surcharge ~3% on credit; 0% on debit</span>
+                        <span class="pos-cost-line">Dual Pricing ~4% on credit &amp; debit</span>
+                        <span class="pos-cost-line">Interchange Pricing ~2.3%–2.6% + $0.10</span>
+                    </td>
+                    <td data-label="Key Features">Customizable hardware, inventory, e-commerce, app marketplace</td>
+                    <td data-label="Notes">Contracts common; higher upfront/hardware costs</td>
+                </tr>
+
+                <!-- Dejavoo -->
+                <tr data-categories="Food and Beverage,Retail">
+                    <td data-label="Platform">
+                        <span class="pos-name">Dejavoo</span>
+                    </td>
+                    <td data-label="Best For">Fast casual to full restaurants/retail (affordable Android)</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">$20 monthly</span>
+                        <span class="pos-cost-sub">Basic plan, includes 2 devices</span>
+                        <span class="pos-cost-sub">+$10 per additional device</span>
+                        <span class="pos-cost-line">$50 monthly</span>
+                        <span class="pos-cost-sub">Restaurant/Retail plan</span>
+                        <span class="pos-cost-sub">+$10 per additional device</span>
+                    </td>
+                    <td data-label="Processing Fees">
+                        <span class="pos-cost-line">Surcharge ~3% on credit; 0% on debit</span>
+                        <span class="pos-cost-line">Dual Pricing ~4% on credit &amp; debit</span>
+                        <span class="pos-cost-line">Interchange Pricing</span>
+                    </td>
+                    <td data-label="Key Features">Affordable Android terminals, fast speeds, DejaPayPro (inventory, analytics), dual pricing</td>
+                    <td data-label="Notes">Reseller-based; fewer features; shop rates</td>
+                </tr>
+                
+                <!-- Fishbowl Inventory-->
+                <tr data-categories="B2B,Fintech and Digital Platforms">
+                    <td data-label="Platform">
+                        <span class="pos-name">Fishbowl Inventory</span>
+                    </td>
+                    <td data-label="Best For">Business needing inventory management with connected payments</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">Custom/quote-based</span>
+                    </td>
+                    <td data-label="Processing Fees">
+                        <span class="pos-cost-line">Surcharge ~3% on credit; 0% on debit</span>
+                        <span class="pos-cost-line">Dual Pricing ~4% on credit &amp; debit</span>
+                        <span class="pos-cost-line">Interchange Pricing</span>
+                    </td>
+                    <td data-label="Key Features">Cloud gateway, white-label, fraud detection (WatchDog AI), virtual terminal, recurring, Level 3, cash discount/dual pricing programs</td>
+                    <td data-label="Notes">Gateway-focused (not full POS); great for lowering fees via surcharging</td>
+                </tr>
+
+
+                <!-- Fluid Pay LLC -->
+                <tr data-categories="B2B,Fintech and Digital Platforms,SaaS">
+                    <td data-label="Platform">
+                        <span class="pos-name">Fluid Pay LLC</span>
+                    </td>
+                    <td data-label="Best For">Business needing cloud and online payments</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">Custom/quote-based</span>
+                    </td>
+                    <td data-label="Processing Fees">
+                        <span class="pos-cost-line">Surcharge ~3% on credit; 0% on debit</span>
+                        <span class="pos-cost-line">Dual Pricing ~4% on credit &amp; debit</span>
+                        <span class="pos-cost-line">Interchange Pricing</span>
+                    </td>
+                    <td data-label="Key Features">Cloud gateway, white-label, fraud detection (WatchDog AI), virtual terminal, recurring, Level 3, cash discount/dual pricing programs</td>
+                    <td data-label="Notes">Gateway-focused (not full POS); great for lowering fees via surcharging</td>
+                </tr>
+
+                <!-- Helcim -->
+                <tr data-categories="B2B,Healthcare,Utilities and Government,Real Estate">
+                    <td data-label="Platform">
+                        <span class="pos-name">Helcim</span>
+                    </td>
+                    <td data-label="Best For">B2B, healthcare, services</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">Free POS software</span>
+                    </td>
+                    <td data-label="Processing Fees">Interchange-plus</td>
+                    <td data-label="Key Features">Free software, mobile/tablet, Tap to Pay</td>
+                    <td data-label="Notes">Processor-focused; low-cost/transparent</td>
+                </tr>
+
+                <!-- HYFIN -->
+                <tr data-categories="Food and Beverage,B2B,Fintech and Digital Platforms,Education">
+                    <td data-label="Platform">
+                        <span class="pos-name">Hyfin</span>
+                    </td>
+                    <td data-label="Best For">Businesses needing payments/invoicing with surcharging</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">$40 monthly</span>
+                        <span class="pos-cost-sub">No quickbooks integration</span>
+                        <span class="pos-cost-line">$60 monthly</span>
+                        <span class="pos-cost-sub">Quickbooks Online integration</span>
+                    </td>
+                    <td data-label="Processing Fees">
+                        <span class="pos-cost-line">Surcharge ~3% on credit; 0% on debit</span>
+                        <span class="pos-cost-line">Dual Pricing ~4% on credit &amp; debit</span>
+                        <span class="pos-cost-line">Interchange Pricing</span>
+                    </td>
+                    <td data-label="Key Features">Smart invoicing, payment requests (text/email), recurring/auto payments, virtual terminal, dual pricing/surcharging, API</td>
+                    <td data-label="Notes">Not full POS; payment/invoicing platform; shifts fees to customers</td>
+                </tr>
+
+                <!-- KORONA POS -->
+                <tr data-categories="Retail,Food and Beverage">
+                    <td data-label="Platform">
+                        <span class="pos-name">KORONA POS</span>
+                    </td>
+                    <td data-label="Best For">Retail/QSR/ticketing (flexible, customizable)</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">$59 monthly</span>
+                        <span class="pos-cost-sub">Core plan</span>
+                        <span class="pos-cost-line">$79 monthly</span>
+                        <span class="pos-cost-sub">Pro plan</span>
+                        <span class="pos-cost-line">Per terminal; add-ons +$10</span>
+                    </td>
+                    <td data-label="Processing Fees">
+                        <span class="pos-cost-line">Surcharge ~3% on credit; 0% on debit</span>
+                        <span class="pos-cost-line">Dual Pricing ~4% on credit &amp; debit</span>
+                        <span class="pos-cost-line">Interchange Pricing</span>
+                    </td>
+                    <td data-label="Key Features">Cloud-based, inventory, excellent support, hardware compatibility</td>
+                    <td data-label="Notes">Affordable/custom; strong retail</td>
+                </tr>
+
+                <!-- KwickPOS -->
+                <tr data-categories="Food and Beverage,Retail">
+                    <td data-label="Platform">
+                        <span class="pos-name">KwickPOS</span>
+                    </td>
+                    <td data-label="Best For">Restaurants (QSR, full-service, pizza, bars, cafes, food trucks), retail/salons</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">~$9.99 monthly</span>
+                        <span class="pos-cost-sub">Custom/quote-based</span>
+                        <span class="pos-cost-line">Add-ons like loyalty ~$95 monthly</span>
+                    </td>
+                    <td data-label="Processing Fees">
+                        <span class="pos-cost-line">Surcharge ~3% on credit; 0% on debit</span>
+                        <span class="pos-cost-line">Dual Pricing ~4% on credit &amp; debit</span>
+                        <span class="pos-cost-line">Interchange Pricing</span>
+                    </td>
+                    <td data-label="Key Features">Cloud/on-premise hybrid, online ordering, QR ordering/reviews, driver management, loyalty, kiosks, offline mode, multi-location, 24/7 support</td>
+                    <td data-label="Notes">Flexible hardware (browser-based); pricing may vary; strong support</td>
+                </tr>
+
+                <!-- Lightspeed Restaurant -->
+                <tr data-categories="Food and Beverage,Retail">
+                    <td data-label="Platform">
+                        <span class="pos-name">Lightspeed Restaurant</span>
+                    </td>
+                    <td data-label="Best For">Multi-location, fine-dining, scalable restaurants</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">$69 monthly</span>
+                        <span class="pos-cost-sub">Starter plan (add-ons extra)</span>
+                        <span class="pos-cost-line">$189 monthly</span>
+                        <span class="pos-cost-sub">Essential plan (add-ons extra)</span>
+                        <span class="pos-cost-line">$399 monthly</span>
+                        <span class="pos-cost-sub">Premium plan (per location; add-ons extra)</span>
+                    </td>
+                    <td data-label="Processing Fees">~2.6% + $0.10 – $0.15 per transaction</td>
+                    <td data-label="Key Features">Robust inventory, multi-location, e-commerce, analytics</td>
+                    <td data-label="Notes">Strong for growth; add-ons needed</td>
+                </tr>
+
+                <!-- NMI -->
+                <tr data-categories="B2B,Fintech and Digital Platforms,SaaS,E-commerce">
+                    <td data-label="Platform">
+                        <span class="pos-name">NMI</span>
+                    </td>
+                    <td data-label="Best For">E-commerce, invoicing, online stores</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">$20 monthly</span>
+                        <span class="pos-cost-sub">$0.10 per transaction</span>
+                    </td>
+                    <td data-label="Processing Fees">
+                        <span class="pos-cost-line">Surcharge ~3% on credit; 0% on debit</span>
+                        <span class="pos-cost-line">Dual Pricing ~4% on credit &amp; debit</span>
+                        <span class="pos-cost-line">Interchange Pricing</span>
+                    </td>
+                    <td data-label="Key Features">Virtual terminal, recurring billing, Level 2/3 processing, mobile payments, fraud suite, tokenization, ACH, hosted payment pages</td>
+                    <td data-label="Notes">Recurring billing and subscription management; seamless integration with over 150 systems; limited customization in reporting; outdated or confusing interface in parts of the dashboard</td>
+                </tr>
+
+                <!-- Owner.com -->
+                <tr data-categories="Food and Beverage,E-commerce">
+                    <td data-label="Platform">
+                        <span class="pos-name">Owner.com</span>
+                    </td>
+                    <td data-label="Best For">Online ordering/delivery management (add-on)</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">$499 monthly</span>
+                        <span class="pos-cost-sub">All-in; 0% commission</span>
+                    </td>
+                    <td data-label="Processing Fees">N/A (integrates with POS)</td>
+                    <td data-label="Key Features">Website, online ordering, marketing, no commissions</td>
+                    <td data-label="Notes">Not full POS; online focus</td>
+                </tr>
+
+                <!-- PAR Technology -->
+                <tr data-categories="Food and Beverage">
+                    <td data-label="Platform">
+                        <span class="pos-name">PAR Technology</span>
+                    </td>
+                    <td data-label="Best For">QSR, fast casual, table service restaurants, chains (cloud POS)</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">~$90+ monthly</span>
+                        <span class="pos-cost-sub">Enterprise plan</span>
+                    </td>
+                    <td data-label="Processing Fees">Varies (integrated payments)</td>
+                    <td data-label="Key Features">Cloud-based, scalable, integrations (loyalty, ordering, drive-thru, KDS), unified commerce, analytics</td>
+                    <td data-label="Notes">Enterprise/chain-focused; quote-heavy; hardware/integrations strong</td>
+                </tr>
+
+                <!-- Revel Systems -->
+                <tr data-categories="Food and Beverage,Retail,Travel and Hospitality">
+                    <td data-label="Platform">
+                        <span class="pos-name">Revel Systems</span>
+                    </td>
+                    <td data-label="Best For">Large operations, chains, multi-location (iPad-based)</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">Starting ~$99/terminal</span>
+                        <span class="pos-cost-sub">Essentials plan</span>
+                        <span class="pos-cost-sub">Higher for Pro plan</span>
+                    </td>
+                    <td data-label="Processing Fees">Varies (flat or custom)</td>
+                    <td data-label="Key Features">Feature-rich, multi-location, inventory, scalable</td>
+                    <td data-label="Notes">Complex; suited for larger ops</td>
+                </tr>
+                
+                <!-- SimplyBook.me -->
+                <tr data-categories="Food and Beverage">
+                    <td data-label="Platform">
+                        <span class="pos-name">SimplyBook.me</span>
+                    </td>
+                    <td data-label="Best For">Healthcare & medical services, education & tutoring, beauty & wellness</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">$30 monthly</span>
+                        <span class="pos-cost-sub">$0.10 per transaction</span>
+                    </td>
+                    <td data-label="Processing Fees">
+                        <span class="pos-cost-line">Surcharge ~3% on credit; 0% on debit</span>
+                        <span class="pos-cost-line">Dual Pricing ~4% on credit &amp; debit</span>
+                        <span class="pos-cost-line">Interchange Pricing</span>
+                    </td>
+                    <td data-label="Key Features">Online booking 24/7, mobile-optimized booking website, Facebook and Instagram booking integration, Google Business integration, calendar synchronization</td>
+                    <td data-label="Notes">Extensive customization for branding and booking pages; booking limits constrain growth (50–2,000/month by plan); limiting functionality</td>
+                </tr>
+
+                <!-- Slice -->
+                <tr data-categories="Food and Beverage">
+                    <td data-label="Platform">
+                        <span class="pos-name">Slice</span>
+                    </td>
+                    <td data-label="Best For">Independent pizzerias</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">5% of sales (all-in)</span>
+                        <span class="pos-cost-sub">Family plan</span>
+                        <span class="pos-cost-sub">A la carte: Higher % + add-ons</span>
+                    </td>
+                    <td data-label="Processing Fees">Bundled (low/zero via dual pricing)</td>
+                    <td data-label="Key Features">Pizza online ordering, phone management, integrations, marketing</td>
+                    <td data-label="Notes">Niche (pizza only); % scales with volume</td>
+                </tr>
+
+                <!-- SpotOn -->
+                <tr data-categories="Food and Beverage">
+                    <td data-label="Platform">
+                        <span class="pos-name">SpotOn</span>
+                    </td>
+                    <td data-label="Best For">Restaurants (team management, affordable hardware)</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">~$55/station monthly</span>
+                        <span class="pos-cost-sub">Essentials plan</span>
+                        <span class="pos-cost-line">~$135/station monthly</span>
+                        <span class="pos-cost-sub">Full plan</span>
+                    </td>
+                    <td data-label="Processing Fees">~2.45% + $0.15 or bundled</td>
+                    <td data-label="Key Features">Team communication, scheduling, multi-unit</td>
+                    <td data-label="Notes">Varies by bundle</td>
+                </tr>
+
+                <!-- Square -->
+                <tr data-categories="Retail,E-commerce,Food and Beverage,Education">
+                    <td data-label="Platform">
+                        <span class="pos-name">Square</span>
+                    </td>
+                    <td data-label="Best For">Small businesses, retail, restaurants, quick setup</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">Free</span>
+                        <span class="pos-cost-sub">Basic plan</span>
+                        <span class="pos-cost-line">$49/location monthly</span>
+                        <span class="pos-cost-sub">Plus plan</span>
+                        <span class="pos-cost-line">$149+/location monthly</span>
+                        <span class="pos-cost-sub">Premium plan</span>
+                    </td>
+                    <td data-label="Processing Fees">~2.6% + $0.15</td>
+                    <td data-label="Key Features">Free tier, easy hardware, inventory, online ordering, loyalty, no contracts</td>
+                    <td data-label="Notes">Beginner-friendly; fees add up on volume</td>
+                </tr>
+
+                <!-- Stripe -->
+                <tr data-categories="E-commerce,Fintech and Digital Platforms,SaaS,B2B">
+                    <td data-label="Platform">
+                        <span class="pos-name">Stripe</span>
+                    </td>
+                    <td data-label="Best For">Customizable payments/POS (ecommerce, hybrid)</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">$0 monthly</span>
+                        <span class="pos-cost-sub">Core plan</span>
+                        <span class="pos-cost-sub">Terminal/POS add-ons vary</span>
+                    </td>
+                    <td data-label="Processing Fees">In-person: ~2.7% + $0.05<br>Online: ~2.9% + $0.30</td>
+                    <td data-label="Key Features">API integration, customizable, online/in-person</td>
+                    <td data-label="Notes">Developer-strong; fees stack for advanced</td>
+                </tr>
+
+                <!-- SumUp -->
+                <tr data-categories="Food and Beverage,Retail">
+                    <td data-label="Platform">
+                        <span class="pos-name">SumUp</span>
+                    </td>
+                    <td data-label="Best For">Small cafes, fast-paced, minimalist</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">$0 monthly</span>
+                        <span class="pos-cost-sub">Basic plan</span>
+                        <span class="pos-cost-line">$99–$289 monthly</span>
+                        <span class="pos-cost-sub">Connect plan</span>
+                    </td>
+                    <td data-label="Processing Fees">~2.6% + $0.10</td>
+                    <td data-label="Key Features">Short learning curve, cloud POS, marketing add-ons</td>
+                    <td data-label="Notes">Minimalist; good for small/fast-paced</td>
+                </tr>
+
+                <!-- SwipeSimple -->
+                <tr data-categories="Retail,Food and Beverage,B2B">
+                    <td data-label="Platform">
+                        <span class="pos-name">SwipeSimple</span>
+                    </td>
+                    <td data-label="Best For">Small businesses, mobile merchants, and service-based businesses</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">$39 monthly</span>
+                    </td>
+                    <td data-label="Processing Fees">
+                        <span class="pos-cost-line">Surcharge ~3% on credit; 0% on debit</span>
+                        <span class="pos-cost-line">Dual Pricing ~4% on credit &amp; debit</span>
+                        <span class="pos-cost-line">Interchange Pricing</span>
+                    </td>
+                    <td data-label="Key Features">Mobile card reader, invoicing, virtual terminal, inventory management, reporting, simple dashboard</td>
+                    <td data-label="Notes">Simple interface ideal for merchants new to card acceptance; no proprietary processing lock-in</td>
+                </tr>
+
+                <!-- Toast -->
+                <tr data-categories="Food and Beverage">
+                    <td data-label="Platform">
+                        <span class="pos-name">Toast</span>
+                    </td>
+                    <td data-label="Best For">Restaurants (full-service, quick-service)</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">$0 with bundle</span>
+                        <span class="pos-cost-sub">Starter Kit</span>
+                        <span class="pos-cost-line">~$69+ monthly</span>
+                        <span class="pos-cost-sub">Point of sale</span>
+                        <span class="pos-cost-sub">Custom plans available</span>
+                    </td>
+                    <td data-label="Processing Fees">~2.49% + $0.15 (traditional); higher pay-as-you-go</td>
+                    <td data-label="Key Features">Table management, kitchen display, online ordering, payroll, 24/7 support</td>
+                    <td data-label="Notes">Restaurant-focused; ecosystem lock-in, hardware pricey</td>
+                </tr>
+
+                <!-- TouchBistro -->
+                <tr data-categories="Food and Beverage">
+                    <td data-label="Platform">
+                        <span class="pos-name">TouchBistro</span>
+                    </td>
+                    <td data-label="Best For">Restaurants (intuitive, multi-location)</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">Starting ~$69</span>
+                        <span class="pos-cost-sub">Core plan</span>
+                        <span class="pos-cost-line">Bundles ~$119</span>
+                        <span class="pos-cost-sub">Add-ons extra</span>
+                    </td>
+                    <td data-label="Processing Fees">
+                        <span class="pos-cost-line">Surcharge ~3% on credit; 0% on debit</span>
+                        <span class="pos-cost-line">Dual Pricing ~4% on credit &amp; debit</span>
+                        <span class="pos-cost-line">Interchange Pricing</span>
+                    </td>
+                    <td data-label="Key Features">Tablet-based, table management, staff management, strong support</td>
+                    <td data-label="Notes">Add-ons increase cost; easy use</td>
+                </tr>
+
+                <!-- Union POS -->
+                <tr data-categories="Food and Beverage">
+                    <td data-label="Platform">
+                        <span class="pos-name">Union POS</span>
+                    </td>
+                    <td data-label="Best For">Bars, restaurants serving liquor</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">Inquire within</span>
+                    </td>
+                    <td data-label="Processing Fees">
+                        <span class="pos-cost-line">Surcharge ~3% on credit; 0% on debit</span>
+                        <span class="pos-cost-line">Dual Pricing ~4% on credit &amp; debit</span>
+                        <span class="pos-cost-line">Interchange Pricing</span>
+                    </td>
+                    <td data-label="Key Features">Smart invoicing, payment requests (text/email), recurring/auto payments, virtual terminal, dual pricing/surcharging, API</td>
+                    <td data-label="Notes">Full POS system, hardware is iPad based.</td>
+                </tr>
+                
+                <!-- USA ePay -->
+                <tr data-categories="Retail,E-commerce">
+                    <td data-label="Platform">
+                        <span class="pos-name">USA ePay</span>
+                    </td>
+                    <td data-label="Best For">Financial services, retail & e-commerce stores, mobile & field sales teams</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">$49.95 one time setup fee</span>
+                        <span class="pos-cost-sub">$0.05 per transaction</span>
+                        <span class="pos-cost-line">$12.50 monthly</span>
+                        <span class="pos-cost-sub">Silver Package</span>
+                        <span class="pos-cost-line">$17.50 monthly</span>
+                        <span class="pos-cost-sub">Gold package</span>
+                        <span class="pos-cost-line">$20.00 monthly</span>
+                        <span class="pos-cost-sub">Platinum package</span>
+                    </td>
+                    <td data-label="Processing Fees">
+                        <span class="pos-cost-line">Surcharge ~3% on credit; 0% on debit</span>
+                        <span class="pos-cost-line">Dual Pricing ~4% on credit &amp; debit</span>
+                        <span class="pos-cost-line">Interchange Pricing</span>
+                    </td>
+                    <td data-label="Key Features">Virtual terminal, recurring/auto payments, hosted payments page</td>
+                    <td data-label="Notes">Supports recurring billing and ACH payments; mobile app for on-the-go payments; outdated interface reported by some users; extra costs for premium features</td>
+                </tr>
+
+                <!-- Valor -->
+                <tr data-categories="Retail,Food and Beverage,B2B">
+                    <td data-label="Platform">
+                        <span class="pos-name">Valor</span>
+                    </td>
+                    <td data-label="Best For">Retail and restaurant merchants needing cloud POS with surcharging</td>
+                    <td data-label="Monthly Cost">
+                        <span class="pos-cost-line">$20 monthly</span>
+                        <span class="pos-cost-sub">$0.10 per transaction</span>
+                    </td>
+                    <td data-label="Processing Fees">
+                        <span class="pos-cost-line">Surcharge ~3% on credit; 0% on debit</span>
+                        <span class="pos-cost-line">Dual Pricing ~4% on credit &amp; debit</span>
+                        <span class="pos-cost-line">Interchange Pricing</span>
+                    </td>
+                    <td data-label="Key Features">Cloud-based POS, PaymentSITE online portal, dual pricing/surcharging, VirtualPAY, inventory management, reporting</td>
+                    <td data-label="Notes">Strong dual pricing and surcharging support; good fit for merchants looking to offset processing costs</td>
+                </tr>
+
+            </tbody>
+        </table>
+        <p class="no-results" id="no-results">No systems match this category.</p>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p class="footer-text">&copy; 2026 Brennan Keating. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            nav.classList.toggle('scrolled', window.scrollY > 100);
+        });
+
+        // Filter logic
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const rows = document.querySelectorAll('#pos-table tbody tr');
+        const noResults = document.getElementById('no-results');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+                let visible = 0;
+
+                rows.forEach(row => {
+                    const cats = row.dataset.categories || '';
+                    const show = filter === 'all' || cats.split(',').some(c => c.trim() === filter);
+                    if (show) {
+                        row.classList.remove('hidden-row');
+                        visible++;
+                    } else {
+                        row.classList.add('hidden-row');
+                    }
+                });
+
+                noResults.classList.toggle('visible', visible === 0);
+            });
+        });
+    </script>
+</body>
+</html>
