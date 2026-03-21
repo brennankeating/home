@@ -421,7 +421,7 @@ nav.scrolled {
     font-family: var(--font-headline);
     font-size: 1.25rem;
     font-weight: 900;
-    margin-bottom: 1rem;
+    margin-bottom: 0.1rem;
     color: var(--white);
 }
 
