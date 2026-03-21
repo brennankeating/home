@@ -60,16 +60,16 @@ nav.scrolled {
 }
 
 .logo {
-    font-family: var(--font-headline);
-    font-size: 1.5rem;
-    font-weight: 900;
-    letter-spacing: 0.02em;
     text-decoration: none;
-    color: var(--white);
-    -webkit-text-fill-color: var(--white);
-    background: none;
-    -webkit-background-clip: unset;
-    background-clip: unset;
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 1.5rem;
+    width: auto;
+    display: block;
+    filter: brightness(0) invert(1);
 }
 
 .nav-links {
@@ -484,7 +484,7 @@ nav.scrolled {
     transform: scale(1.05);
 }
 
-.featured-item:hover .featured-overlay {
+.featured-item:hover .project-info {
     opacity: 1;
 }
 
@@ -493,7 +493,7 @@ nav.scrolled {
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--gray-400);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.15rem;
 }
 
 .featured-title {
@@ -657,7 +657,7 @@ nav.scrolled {
     letter-spacing: 0.2em;
     text-transform: uppercase;
     color: var(--gray-400);
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.15rem;
 }
 
 .project-title {
@@ -665,7 +665,7 @@ nav.scrolled {
     font-size: 1.25rem;
     font-weight: 900;
     color: var(--white);
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.15rem;
 }
 
 .project-desc {
