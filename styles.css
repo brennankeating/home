@@ -431,6 +431,35 @@ nav.scrolled {
     line-height: 1.8;
 }
 
+.about-card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--gray-800);
+}
+
+.about-card-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 1.1rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gray-400);
+    border: 1px solid var(--gray-700);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+.about-card-btn:hover {
+    color: var(--gray-200);
+    border-color: var(--gray-400);
+}
+
 /* ========================================
    FEATURED WORK (Landing Page)
    ======================================== */

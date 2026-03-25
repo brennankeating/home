@@ -45,8 +45,9 @@
         }
 
         .contact-info h1 {
+            font-family: var(--font-headline);
             font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 700;
+            font-weight: 900;
             line-height: 1.1;
             margin-bottom: 1.5rem;
             background: linear-gradient(135deg, var(--white) 0%, var(--gray-400) 100%);
@@ -102,6 +103,7 @@
             grid-column: 1;
             grid-row: 2;
             align-self: start;
+            margin-top: -96px;
         }
 
         .contact-socials a {
@@ -114,21 +116,39 @@
             transition: all 0.3s ease;
         }
 
-        .contact-socials a:hover {
-            border-color: var(--white);
-            background: rgba(255, 255, 255, 0.05);
+        .contact-socials a[aria-label="YouTube"]:hover {
+            border-color: #ff0000;
+            background: rgba(255, 0, 0, 0.05);
+        }
+
+        .contact-socials a[aria-label="Instagram"]:hover {
+            border-color: #c13584;
+            background: rgba(193, 53, 132, 0.05);
+        }
+
+        .contact-socials a[aria-label="LinkedIn"]:hover {
+            border-color: #0077b5;
+            background: rgba(0, 119, 181, 0.05);
         }
 
         .contact-socials img {
-            width: 22px;
-            height: 22px;
+            width: 26px;
+            height: 26px;
             object-fit: contain;
-            opacity: 0.7;
-            transition: opacity 0.3s ease;
+            filter: brightness(0) invert(0.55);
+            transition: filter 0.3s ease;
         }
 
-        .contact-socials a:hover img {
-            opacity: 1;
+        .contact-socials a[aria-label="YouTube"]:hover img {
+            filter: brightness(0) saturate(100%) invert(15%) sepia(97%) saturate(7481%) hue-rotate(357deg) brightness(103%) contrast(117%);
+        }
+
+        .contact-socials a[aria-label="Instagram"]:hover img {
+            filter: brightness(0) saturate(100%) invert(28%) sepia(72%) saturate(1200%) hue-rotate(291deg) brightness(95%) contrast(93%);
+        }
+
+        .contact-socials a[aria-label="LinkedIn"]:hover img {
+            filter: brightness(0) saturate(100%) invert(27%) sepia(95%) saturate(549%) hue-rotate(168deg) brightness(94%) contrast(103%);
         }
 
         /* Form Styles */
