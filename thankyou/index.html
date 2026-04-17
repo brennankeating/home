@@ -133,7 +133,6 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav>
         <a href="../" class="logo"><img src="../images/brennan-keating.svg" alt="Brennan Keating"></a>
         <ul class="nav-links">
@@ -179,7 +178,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
         <p class="footer-text">&copy; 2026 Brennan Keating. All rights reserved.</p>
         <div class="footer-links">
@@ -189,7 +187,6 @@
     </footer>
 
     <script>
-        // Mobile Menu Toggle
         const menuToggle = document.querySelector('.menu-toggle');
         const navLinks = document.querySelector('.nav-links');
 
@@ -198,7 +195,6 @@
             navLinks.classList.toggle('active');
         });
 
-        // Close menu when clicking a link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 menuToggle.classList.remove('active');
@@ -206,7 +202,6 @@
             });
         });
 
-        // Navbar scroll effect
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
             if (window.scrollY > 100) {

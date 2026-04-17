@@ -178,7 +178,6 @@
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <nav>
         <a href="../" class="logo"><img src="../images/brennan-keating.svg" alt="Brennan Keating"></a>
         <ul class="nav-links">
@@ -196,7 +195,6 @@
         </div>
     </nav>
 
-    <!-- Page Header -->
     <header class="page-header">
         <h1 class="page-title">Products</h1>
         <p class="page-subtitle">Digital products, design assets, and resources. More coming soon.</p>
@@ -262,7 +260,6 @@
 
     </section>
 
-    <!-- Footer -->
     <footer>
         <p class="footer-text">&copy; 2026 Brennan Keating. All rights reserved.</p>
         <div class="footer-links">
@@ -272,7 +269,6 @@
     </footer>
 
     <script>
-        // Mobile Menu Toggle
         const menuToggle = document.querySelector('.menu-toggle');
         const navLinks = document.querySelector('.nav-links');
 
@@ -288,7 +284,6 @@
             });
         });
 
-        // Navbar scroll effect
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
             nav.classList.toggle('scrolled', window.scrollY > 100);
@@ -386,7 +381,6 @@
         loadProducts();
     </script>
 
-    <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",

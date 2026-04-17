@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="../../styles.css?v=2">
 </head>
 <body>
-    <!-- Navigation -->
     <nav>
         <a href="../../" class="logo"><img src="../../images/brennan-keating.svg" alt="Brennan Keating"></a>
         <ul class="nav-links">
@@ -32,7 +31,6 @@
         </div>
     </nav>
 
-    <!-- Project Hero -->
     <section class="project-hero">
         <div class="project-hero-content">
             <div class="project-meta">
@@ -60,10 +58,8 @@
         </div>
     </section>
 
-    <!-- Project Content -->
     <main class="project-content">
 
-        <!-- Overview Section -->
         <section class="project-section">
             <h2 class="project-section-title">Overview</h2>
             <p class="project-text">
@@ -73,12 +69,10 @@
             </p>
         </section>
 
-        <!-- Main Gallery -->
         <section class="project-section">
             <h2 class="project-section-title">The Work</h2>
             <div class="project-gallery">
 
-                <!-- Two Column Layout - 1080x1350 images -->
                 <div class="gallery-half">
                     <div class="gallery-item">
                         <img data-src="../../images/projects/project-27-01" alt="Project 27 Image 1">
@@ -88,14 +82,12 @@
                     </div>
                 </div>
 
-                <!-- Full Width - 1920x1080 image -->
                 <div class="gallery-full">
                     <div class="gallery-item">
                         <img data-src="../../images/projects/project-27-03" alt="Project 27 Image 3">
                     </div>
                 </div>
                 
-                <!-- Two Column Layout - 1080x1350 images -->
                 <div class="gallery-half">
                     <div class="gallery-item">
                         <img data-src="../../images/projects/project-27-04" alt="Project 27 Image 5">
@@ -105,7 +97,6 @@
                     </div>
                 </div>
                 
-                <!-- Two Column Layout - 1080x1350 images -->
                 <div class="gallery-half">
                     <div class="gallery-item">
                         <img data-src="../../images/projects/project-27-06" alt="Project 27 Image 6">
@@ -118,7 +109,6 @@
             </div>
         </section>
 
-        <!-- Results Section -->
         <section class="project-section">
             <h2 class="project-section-title">Results</h2>
             <p class="project-text">
@@ -128,7 +118,6 @@
 
     </main>
 
-    <!-- Project Navigation -->
     <nav class="project-nav">
         <a href="../26/" class="prev">
             <span class="nav-label">Previous Project</span>
@@ -140,7 +129,6 @@
         </a>
     </nav>
 
-    <!-- Footer -->
     <footer>
         <p class="footer-text">&copy; 2026 Brennan Keating. All rights reserved.</p>
         <div class="footer-links">
@@ -150,7 +138,6 @@
     </footer>
 
     <script>
-        // Mobile Menu Toggle
         const menuToggle = document.querySelector('.menu-toggle');
         const navLinks = document.querySelector('.nav-links');
 
@@ -159,7 +146,6 @@
             navLinks.classList.toggle('active');
         });
 
-        // Close menu when clicking a link
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 menuToggle.classList.remove('active');
@@ -167,7 +153,6 @@
             });
         });
 
-        // Navbar scroll effect
         window.addEventListener('scroll', () => {
             const nav = document.querySelector('nav');
             if (window.scrollY > 100) {
@@ -177,7 +162,6 @@
             }
         });
 
-        // Load media with multiple format support (.webp, .png, .jpg, .gif, .mp4)
         function loadMedia(img) {
             const baseSrc = img.getAttribute('data-src');
             if (!baseSrc) return;

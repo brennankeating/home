@@ -1,8 +1,3 @@
-/* ========================================
-   PORTFOLIO WEBSITE - STYLES
-   Black & White Gradient Theme
-   ======================================== */
-
 * {
     margin: 0;
     padding: 0;
@@ -35,10 +30,6 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
 }
-
-/* ========================================
-   NAVIGATION
-   ======================================== */
 
 nav {
     position: fixed;
@@ -107,7 +98,6 @@ nav.scrolled {
     width: 100%;
 }
 
-/* Mobile Menu */
 .menu-toggle {
     display: none;
     flex-direction: column;
@@ -123,10 +113,6 @@ nav.scrolled {
     transition: all 0.3s ease;
 }
 
-/* ========================================
-   HERO SECTION
-   ======================================== */
-
 .hero {
     min-height: 100vh;
     display: flex;
@@ -136,43 +122,14 @@ nav.scrolled {
     overflow: hidden;
 }
 
-.hero-bg {
-    display: none;
-}
-
-.hero-gradient-orb {
-    display: none;
-}
-
-/* Hero Image Sequence */
-.hero-sequence {
+.hero-video {
     position: absolute;
     inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     z-index: 0;
     pointer-events: none;
-    contain: strict;
-}
-
-.hero-frame {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%) translateZ(0);
-    width: auto;
-    height: auto;
-    max-height: 85%;
-    max-width: 90%;
-    object-fit: contain;
-    opacity: 0;
-    visibility: hidden;
-    will-change: opacity, visibility;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-}
-
-.hero-frame.active {
-    opacity: 1;
-    visibility: visible;
 }
 
 .hero-content {
@@ -186,7 +143,7 @@ nav.scrolled {
     font-size: 0.875rem;
     letter-spacing: 0.4em;
     text-transform: uppercase;
-    color: var(--gray-400);
+    color: var(--gray-300);
     margin-bottom: 2rem;
     opacity: 0;
     animation: fadeInUp 1s ease forwards;
@@ -234,7 +191,7 @@ nav.scrolled {
 
 .hero-description {
     font-size: 1.25rem;
-    color: var(--gray-400);
+    color: var(--gray-300);
     max-width: 600px;
     margin: 0 auto 3rem;
     opacity: 0;
@@ -318,10 +275,6 @@ nav.scrolled {
     0%, 100% { transform: translateX(-50%) translateY(0); }
     50% { transform: translateX(-50%) translateY(10px); }
 }
-
-/* ========================================
-   ABOUT SECTION (Landing Page)
-   ======================================== */
 
 .about-section {
     padding: 8rem 4rem;
@@ -460,10 +413,6 @@ nav.scrolled {
     border-color: var(--gray-400);
 }
 
-/* ========================================
-   FEATURED WORK (Landing Page)
-   ======================================== */
-
 .featured-section {
     padding: 8rem 4rem;
     background: linear-gradient(180deg, var(--black) 0%, var(--gray-900) 50%, var(--black) 100%);
@@ -568,10 +517,6 @@ nav.scrolled {
     margin: 4rem auto 0;
 }
 
-/* ========================================
-   PROJECTS PAGE
-   ======================================== */
-
 .page-header {
     padding: 10rem 4rem 5rem;
     text-align: center;
@@ -596,7 +541,6 @@ nav.scrolled {
     margin: 0 auto;
 }
 
-/* Filter Tabs */
 .filter-tabs {
     display: flex;
     justify-content: center;
@@ -625,7 +569,6 @@ nav.scrolled {
     background: rgba(255, 255, 255, 0.05);
 }
 
-/* Projects Grid */
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -703,10 +646,6 @@ nav.scrolled {
     line-height: 1.6;
 }
 
-/* ========================================
-   INDIVIDUAL PROJECT PAGE
-   ======================================== */
-
 .project-hero {
     min-height: 70vh;
     display: flex;
@@ -763,12 +702,11 @@ nav.scrolled {
 
 .project-hero-desc {
     font-size: 1.125rem;
-    color: var(--gray-400);
+    color: var(--gray-300);
     max-width: 600px;
     line-height: 1.8;
 }
 
-/* Project Content */
 .project-content {
     padding: 4rem;
     max-width: 1400px;
@@ -796,7 +734,6 @@ nav.scrolled {
     max-width: 800px;
 }
 
-/* Project Gallery */
 .project-gallery {
     display: grid;
     gap: 2rem;
@@ -826,7 +763,6 @@ nav.scrolled {
     display: block;
 }
 
-/* Vertically center wide-angle videos in gallery containers */
 .gallery-full .gallery-item {
     display: flex;
     align-items: center;
@@ -862,7 +798,6 @@ nav.scrolled {
     transform: scale(1.02);
 }
 
-/* Project Navigation */
 .project-nav {
     position: static;
     background: transparent;
@@ -902,10 +837,6 @@ nav.scrolled {
 .project-nav .next {
     text-align: right;
 }
-
-/* ========================================
-   CONTACT SECTION
-   ======================================== */
 
 .contact-section {
     padding: 8rem 4rem;
@@ -1008,10 +939,6 @@ nav.scrolled {
     fill: var(--white);
 }
 
-/* ========================================
-   FOOTER
-   ======================================== */
-
 footer {
     padding: 3rem 4rem;
     border-top: 1px solid var(--gray-800);
@@ -1043,17 +970,7 @@ footer {
     color: var(--white);
 }
 
-/* ========================================
-   RESPONSIVE DESIGN
-   ======================================== */
-
 @media (max-width: 1024px) {
-    .hero-frame {
-        max-height: 115%;
-        max-width: 115%;
-        transform: translateX(-50%) translateZ(0);
-    }
-
     .about-grid {
         grid-template-columns: 1fr;
         max-width: 600px;
@@ -1069,12 +986,6 @@ footer {
 }
 
 @media (max-width: 768px) {
-    .hero-frame {
-        max-height: 175%;
-        max-width: 175%;
-        transform: translateX(-50%) translateZ(0);
-    }
-
     nav {
         padding: 1.5rem 2rem;
     }
@@ -1175,7 +1086,6 @@ footer {
         text-align: center;
     }
 
-    /* Mobile video centering - remove extra space below */
     .gallery-full .gallery-item {
         max-height: none;
     }
@@ -1186,7 +1096,6 @@ footer {
     }
 }
 
-/* Landscape orientation on small devices */
 @media (max-width: 900px) and (orientation: landscape) {
     .hero-content {
         padding-top: 5rem;
@@ -1198,10 +1107,6 @@ footer {
         padding-top: 4rem;
     }
 }
-
-/* ========================================
-   UTILITY CLASSES
-   ======================================== */
 
 .text-gradient {
     background: linear-gradient(135deg, var(--white) 0%, var(--gray-400) 100%);
@@ -1221,7 +1126,6 @@ footer {
     transform: translateY(0);
 }
 
-/* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 8px;
 }
@@ -1239,7 +1143,6 @@ footer {
     background: var(--gray-600);
 }
 
-/* Selection */
 ::selection {
     background: var(--white);
     color: var(--black);
