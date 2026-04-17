@@ -139,6 +139,7 @@ nav.scrolled {
     padding: 0 2rem;
     position: relative;
     z-index: 1;
+    transform: translateZ(0);
 }
 
 .hero-tagline {
