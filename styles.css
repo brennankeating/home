@@ -984,9 +984,7 @@ footer {
     .gallery-half {
         grid-template-columns: 1fr;
     }
-}
 
-@media (max-width: 768px) {
     nav {
         padding: 1.5rem 2rem;
     }
@@ -1024,6 +1022,9 @@ footer {
     .menu-toggle.active span:nth-child(3) {
         transform: rotate(-45deg) translate(5px, -5px);
     }
+}
+
+@media (max-width: 768px) {
 
     .hero-content {
         padding: 0 1.5rem;
