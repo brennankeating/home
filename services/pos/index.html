@@ -57,6 +57,7 @@
             transition: all 0.2s ease;
             white-space: nowrap;
             font-family: inherit;
+            flex-shrink: 0;
         }
 
         .filter-btn:hover {
@@ -175,8 +176,51 @@
         }
 
         /* ── Mobile Cards ── */
+        .filter-scroll-track {
+            position: relative;
+        }
+
         @media (max-width: 900px) {
-            .filter-bar,
+            .filter-bar {
+                padding-left: 0;
+                padding-right: 0;
+                align-items: stretch;
+            }
+
+            .filter-label {
+                padding-left: 1.5rem;
+            }
+
+            .filter-scroll-track::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 4rem;
+                height: 100%;
+                background: linear-gradient(to right, transparent, var(--black));
+                pointer-events: none;
+                transition: opacity 0.3s ease;
+            }
+
+            .filter-scroll-track.at-end::after {
+                opacity: 0;
+            }
+
+            .filter-buttons {
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                justify-content: flex-start;
+                gap: 0.5rem;
+                padding: 0.25rem 1.5rem 0.75rem;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+            }
+
+            .filter-buttons::-webkit-scrollbar {
+                display: none;
+            }
+
             .pos-table-wrap {
                 padding-left: 2rem;
                 padding-right: 2rem;
@@ -270,6 +314,7 @@
     <!-- Filter Bar -->
     <div class="filter-bar" id="filter-bar">
         <span class="filter-label">Filter by:</span>
+        <div class="filter-scroll-track">
         <div class="filter-buttons">
             <button class="filter-btn active" data-filter="all">All</button>
             <button class="filter-btn" data-filter="Retail">Retail</button>
@@ -283,6 +328,7 @@
             <button class="filter-btn" data-filter="Real Estate">Real Estate</button>
             <button class="filter-btn" data-filter="Fintech and Digital Platforms">Fintech &amp; Digital</button>
             <button class="filter-btn" data-filter="SaaS">SaaS</button>
+        </div>
         </div>
     </div>
 
@@ -911,6 +957,16 @@
             const nav = document.querySelector('nav');
             nav.classList.toggle('scrolled', window.scrollY > 100);
         });
+
+        // Scroll fade indicator
+        const scrollTrack = document.querySelector('.filter-scroll-track');
+        const filterButtons = document.querySelector('.filter-buttons');
+        function updateFade() {
+            const atEnd = filterButtons.scrollLeft + filterButtons.clientWidth >= filterButtons.scrollWidth - 4;
+            scrollTrack.classList.toggle('at-end', atEnd);
+        }
+        filterButtons.addEventListener('scroll', updateFade, { passive: true });
+        updateFade();
 
         // Filter logic
         const filterBtns = document.querySelectorAll('.filter-btn');
