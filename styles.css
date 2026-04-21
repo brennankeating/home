@@ -524,8 +524,8 @@ nav.scrolled {
     padding: 10rem 4rem 5rem;
     text-align: center;
     background: var(--black);
-    background-size: 100% auto;
-    background-position: top center;
+    background-size: cover;
+    background-position: center;
     background-repeat: no-repeat;
 }
 
@@ -673,7 +673,19 @@ nav.scrolled {
     justify-content: center;
     padding: 8rem 0 4rem;
     position: relative;
-    background: linear-gradient(180deg, var(--gray-900) 0%, var(--black) 100%);
+    background-image: url('images/hero/projects.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color: var(--black);
+}
+
+.project-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.13);
+    z-index: 0;
 }
 
 .project-hero-content {
@@ -681,6 +693,8 @@ nav.scrolled {
     max-width: 1400px;
     padding: 0 4rem;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 .project-meta {
