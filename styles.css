@@ -767,9 +767,8 @@ nav.scrolled {
 .project-nav {
     display: flex;
     justify-content: space-between;
-    padding: 4rem;
-    border-top: 1px solid var(--gray-800);
-    margin-top: 4rem;
+    padding: 2rem 4rem 4rem;
+    margin-top: 1rem;
 }
 
 .project-nav a {
@@ -903,7 +902,6 @@ nav.scrolled {
 
 footer {
     padding: 3rem 4rem;
-    border-top: 1px solid var(--gray-800);
     display: flex;
     justify-content: space-between;
     align-items: center;
