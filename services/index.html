@@ -32,7 +32,10 @@
         .service-card {
             position: relative;
             border: 1px solid var(--gray-800);
-            background: linear-gradient(135deg, var(--gray-900) 0%, var(--black) 100%);
+            background-color: var(--black);
+            background-image: url('../images/cards.png');
+            background-size: cover;
+            background-position: center;
             display: flex;
             flex-direction: column;
             padding: 3rem 2rem;
@@ -75,7 +78,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, var(--gray-800) 0%, var(--gray-900) 100%);
+            background: var(--black);
             border: 1px solid var(--gray-700);
         }
 
@@ -177,7 +180,7 @@
         </div>
     </nav>
 
-    <header class="page-header" style="background-image: url('../images/hero/services.webp');">
+    <header class="page-header" style="background-image: url('../images/hero/services.png');">
         <h1 class="page-title">Services</h1>
         <p class="page-subtitle">Marketing, POS consulting, automation, and IT strategy to help your business grow.</p>
     </header>

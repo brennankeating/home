@@ -315,7 +315,10 @@ nav.scrolled {
 
 .about-card {
     padding: 3rem 2rem;
-    background: linear-gradient(135deg, var(--gray-900) 0%, var(--black) 100%);
+    background-color: var(--black);
+    background-image: url('./images/cards.png');
+    background-size: cover;
+    background-position: center;
     border: 1px solid var(--gray-800);
     transition: all 0.4s ease;
     position: relative;
@@ -350,7 +353,7 @@ nav.scrolled {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--gray-800) 0%, var(--gray-900) 100%);
+    background: var(--black);
     border: 1px solid var(--gray-700);
 }
 
@@ -605,7 +608,7 @@ nav.scrolled {
     justify-content: center;
     padding: 8rem 0 4rem;
     position: relative;
-    background-image: url('images/hero/projects.webp');
+    background-image: url('images/hero/projects.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
