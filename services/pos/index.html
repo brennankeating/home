@@ -23,30 +23,19 @@
             padding: 0 4rem 2.5rem;
             max-width: 1400px;
             margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .filter-label {
-            font-size: 0.65rem;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: var(--gray-600);
         }
 
         .filter-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
             gap: 0.5rem;
         }
 
         .filter-btn {
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            padding: 0.4rem 0.9rem;
+            justify-content: center;
+            padding: 0.6rem 1rem;
             font-size: 0.65rem;
             letter-spacing: 0.12em;
             text-transform: uppercase;
@@ -55,9 +44,8 @@
             background: transparent;
             cursor: pointer;
             transition: all 0.2s ease;
-            white-space: nowrap;
             font-family: inherit;
-            flex-shrink: 0;
+            text-align: center;
         }
 
         .filter-btn:hover {
@@ -66,9 +54,9 @@
         }
 
         .filter-btn.active {
-            color: var(--gray-100);
-            border-color: var(--gray-400);
-            background: rgba(255, 255, 255, 0.04);
+            color: var(--black);
+            border-color: var(--white);
+            background: var(--white);
         }
 
         /* Table Wrapper */
@@ -176,49 +164,14 @@
         }
 
         /* ── Mobile Cards ── */
-        .filter-scroll-track {
-            position: relative;
-        }
-
         @media (max-width: 900px) {
             .filter-bar {
-                padding-left: 0;
-                padding-right: 0;
-                align-items: stretch;
-            }
-
-            .filter-label {
-                padding-left: 1.5rem;
-            }
-
-            .filter-scroll-track::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                right: 0;
-                width: 4rem;
-                height: 100%;
-                background: linear-gradient(to right, transparent, var(--black));
-                pointer-events: none;
-                transition: opacity 0.3s ease;
-            }
-
-            .filter-scroll-track.at-end::after {
-                opacity: 0;
+                padding-left: 2rem;
+                padding-right: 2rem;
             }
 
             .filter-buttons {
-                flex-wrap: nowrap;
-                overflow-x: auto;
-                justify-content: flex-start;
-                gap: 0.5rem;
-                padding: 0.25rem 1.5rem 0.75rem;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
-            }
-
-            .filter-buttons::-webkit-scrollbar {
-                display: none;
+                grid-template-columns: repeat(3, 1fr);
             }
 
             .pos-table-wrap {
@@ -306,29 +259,26 @@
     </nav>
 
     <!-- Page Header -->
-    <header class="page-header">
+    <header class="page-header" style="background-image: url('../../images/hero/pos.png');">
         <h1 class="page-title">POS Systems</h1>
         <p class="page-subtitle">Point-of-sale system comparison: software costs, processing fees, and key features by business type.</p>
     </header>
 
     <!-- Filter Bar -->
     <div class="filter-bar" id="filter-bar">
-        <span class="filter-label">Filter by:</span>
-        <div class="filter-scroll-track">
         <div class="filter-buttons">
             <button class="filter-btn active" data-filter="all">All</button>
             <button class="filter-btn" data-filter="Retail">Retail</button>
             <button class="filter-btn" data-filter="E-commerce">E-commerce</button>
-            <button class="filter-btn" data-filter="Travel and Hospitality">Travel &amp; Hospitality</button>
-            <button class="filter-btn" data-filter="Food and Beverage">Food &amp; Beverage</button>
+            <button class="filter-btn" data-filter="Travel and Hospitality">Hospitality</button>
+            <button class="filter-btn" data-filter="Food and Beverage">Food &amp; Bev</button>
             <button class="filter-btn" data-filter="Healthcare">Healthcare</button>
-            <button class="filter-btn" data-filter="Utilities and Government">Utilities &amp; Government</button>
+            <button class="filter-btn" data-filter="Utilities and Government">Gov / Utilities</button>
             <button class="filter-btn" data-filter="Education">Education</button>
             <button class="filter-btn" data-filter="B2B">B2B</button>
             <button class="filter-btn" data-filter="Real Estate">Real Estate</button>
-            <button class="filter-btn" data-filter="Fintech and Digital Platforms">Fintech &amp; Digital</button>
+            <button class="filter-btn" data-filter="Fintech and Digital Platforms">Fintech</button>
             <button class="filter-btn" data-filter="SaaS">SaaS</button>
-        </div>
         </div>
     </div>
 
@@ -957,16 +907,6 @@
             const nav = document.querySelector('nav');
             nav.classList.toggle('scrolled', window.scrollY > 100);
         });
-
-        // Scroll fade indicator
-        const scrollTrack = document.querySelector('.filter-scroll-track');
-        const filterButtons = document.querySelector('.filter-buttons');
-        function updateFade() {
-            const atEnd = filterButtons.scrollLeft + filterButtons.clientWidth >= filterButtons.scrollWidth - 4;
-            scrollTrack.classList.toggle('at-end', atEnd);
-        }
-        filterButtons.addEventListener('scroll', updateFade, { passive: true });
-        updateFade();
 
         // Filter logic
         const filterBtns = document.querySelectorAll('.filter-btn');
