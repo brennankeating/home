@@ -316,7 +316,6 @@ nav.scrolled {
 .about-card {
     padding: 3rem 2rem;
     background-color: var(--black);
-    background-image: url('./images/cards.png');
     background-size: cover;
     background-position: center;
     border: 1px solid var(--gray-800);
@@ -344,6 +343,26 @@ nav.scrolled {
 
 .about-card:hover::before {
     opacity: 1;
+}
+
+.about-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: black;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.about-card:hover::after {
+    opacity: 0.66;
+}
+
+.about-card > * {
+    position: relative;
+    z-index: 2;
 }
 
 .card-icon {
