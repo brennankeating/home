@@ -113,6 +113,11 @@
             transition: all 0.3s ease;
         }
 
+        .contact-socials a[aria-label="YouTube"] img {
+            width: 28px;
+            height: 28px;
+        }
+
         .contact-socials a[aria-label="YouTube"]:hover {
             border-color: #ff0000;
             background: rgba(255, 0, 0, 0.05);
@@ -146,6 +151,20 @@
 
         .contact-socials a[aria-label="LinkedIn"]:hover img {
             filter: brightness(0) saturate(100%) invert(27%) sepia(95%) saturate(549%) hue-rotate(168deg) brightness(94%) contrast(103%);
+        }
+
+        .contact-socials a[aria-label="TikTok"] img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .contact-socials a[aria-label="TikTok"]:hover {
+            border-color: #ff0050;
+            background: rgba(255, 0, 80, 0.05);
+        }
+
+        .contact-socials a[aria-label="TikTok"]:hover img {
+            filter: brightness(0) saturate(100%) invert(10%) sepia(99%) saturate(7497%) hue-rotate(339deg) brightness(103%) contrast(107%);
         }
 
         /* Form Styles */
@@ -328,6 +347,9 @@
                 <a href="https://www.linkedin.com/in/brennankeating/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                     <img src="../images/social/linkedin.webp" alt="LinkedIn">
                 </a>
+                <a href="https://www.tiktok.com/@brennankeating" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                    <img src="../images/social/tiktok.svg" alt="TikTok">
+                </a>
             </div>
         </div>
     </section>
@@ -380,7 +402,8 @@
             "sameAs": [
                 "https://www.instagram.com/brennankeating",
                 "https://www.youtube.com/@brennankeating",
-                "https://www.linkedin.com/in/brennankeating/"
+                "https://www.linkedin.com/in/brennankeating/",
+                "https://www.tiktok.com/@brennankeating"
             ]
         }
     }
