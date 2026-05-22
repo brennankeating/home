@@ -1,0 +1,161 @@
+[
+  {
+    "id": "000025",
+    "name": "000025 Medium",
+    "size": "Medium",
+    "category": "Clothing",
+    "price": 2000,
+    "shipping": 500,
+    "currency": "USD",
+    "images": ["/images/clothing/000025-MEDIUM.webp"],
+    "sold": false
+  },
+  {
+    "id": "000031",
+    "name": "000031 Small",
+    "size": "Small",
+    "category": "Clothing",
+    "price": 2000,
+    "shipping": 500,
+    "currency": "USD",
+    "images": ["/images/clothing/000031-SMALL.webp"],
+    "sold": false
+  },
+  {
+    "id": "000037",
+    "name": "000037 Large",
+    "size": "Large",
+    "category": "Clothing",
+    "price": 2000,
+    "shipping": 500,
+    "currency": "USD",
+    "images": ["/images/clothing/000037-LARGE.webp"],
+    "sold": false
+  },
+  {
+    "id": "000038",
+    "name": "000038 Large",
+    "size": "Large",
+    "category": "Clothing",
+    "price": 2000,
+    "shipping": 500,
+    "currency": "USD",
+    "images": [
+      "/images/clothing/000038-LARGE-01.webp",
+      "/images/clothing/000038-LARGE-02.webp"
+    ],
+    "sold": false
+  },
+  {
+    "id": "000039",
+    "name": "000039 Medium",
+    "size": "Medium",
+    "category": "Clothing",
+    "price": 2000,
+    "shipping": 500,
+    "currency": "USD",
+    "images": [
+      "/images/clothing/000039-MEDIUM-01.webp",
+      "/images/clothing/000039-MEDIUM-02.webp"
+    ],
+    "sold": false
+  },
+  {
+    "id": "000040",
+    "name": "000040 Small",
+    "size": "Small",
+    "category": "Clothing",
+    "price": 2000,
+    "shipping": 500,
+    "currency": "USD",
+    "images": [
+      "/images/clothing/000040-SMALL-01.webp",
+      "/images/clothing/000040-SMALL-02.webp"
+    ],
+    "sold": false
+  },
+  {
+    "id": "000041",
+    "name": "000041 Small",
+    "size": "Small",
+    "category": "Clothing",
+    "price": 2000,
+    "shipping": 500,
+    "currency": "USD",
+    "images": [
+      "/images/clothing/000041-SMALL-01.webp",
+      "/images/clothing/000041-SMALL-02.webp"
+    ],
+    "sold": false
+  },
+  {
+    "id": "000042",
+    "name": "000042 XL",
+    "size": "XL",
+    "category": "Clothing",
+    "price": 2000,
+    "shipping": 500,
+    "currency": "USD",
+    "images": [
+      "/images/clothing/000042-XL-01.webp",
+      "/images/clothing/000042-XL-02.webp"
+    ],
+    "sold": false
+  },
+  {
+    "id": "000043",
+    "name": "000043 Large",
+    "size": "Large",
+    "category": "Clothing",
+    "price": 2000,
+    "shipping": 500,
+    "currency": "USD",
+    "images": [
+      "/images/clothing/000043-LARGE-01.webp",
+      "/images/clothing/000043-LARGE-02.webp"
+    ],
+    "sold": false
+  },
+  {
+    "id": "000044",
+    "name": "000044 2XL",
+    "size": "2XL",
+    "category": "Clothing",
+    "price": 2000,
+    "shipping": 500,
+    "currency": "USD",
+    "images": [
+      "/images/clothing/000044-2XL-01.webp",
+      "/images/clothing/000044-2XL-02.webp"
+    ],
+    "sold": false
+  },
+  {
+    "id": "000045",
+    "name": "000045 Large",
+    "size": "Large",
+    "category": "Clothing",
+    "price": 2000,
+    "shipping": 500,
+    "currency": "USD",
+    "images": [
+      "/images/clothing/000045-LARGE-01.webp",
+      "/images/clothing/000045-LARGE-02.webp"
+    ],
+    "sold": false
+  },
+  {
+    "id": "000046",
+    "name": "000046 Large",
+    "size": "Large",
+    "category": "Clothing",
+    "price": 2000,
+    "shipping": 500,
+    "currency": "USD",
+    "images": [
+      "/images/clothing/000046-LARGE-01.webp",
+      "/images/clothing/000046-LARGE-02.webp"
+    ],
+    "sold": false
+  }
+]

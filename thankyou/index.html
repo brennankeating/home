@@ -207,6 +207,11 @@
                 nav.classList.remove('scrolled');
             }
         });
+
+        // Clear cart after successful Stripe purchase
+        if (new URLSearchParams(location.search).has('bk')) {
+            localStorage.removeItem('bk_cart');
+        }
     </script>
 </body>
 </html>

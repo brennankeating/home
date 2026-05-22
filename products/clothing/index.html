@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clothing | Brennan Keating</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="stylesheet" href="https://use.typekit.net/qen5jnd.css">
+    <link rel="stylesheet" href="../../styles.css?v=5">
+    <style>
+        .detail-wrapper {
+            padding: 8rem 4rem 6rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            min-height: 100vh;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray-500);
+            text-decoration: none;
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            margin-bottom: 3rem;
+        }
+
+        .back-link:hover { color: var(--gray-300); }
+
+        .detail-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .detail-images {
+            position: sticky;
+            top: 6rem;
+        }
+
+        .detail-main-img {
+            aspect-ratio: 1;
+            overflow: hidden;
+            background: var(--gray-900);
+            border: 1px solid var(--gray-800);
+        }
+
+        .detail-main-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: opacity 0.2s ease;
+        }
+
+        .detail-thumbs {
+            display: flex;
+            gap: 0.625rem;
+            margin-top: 0.625rem;
+        }
+
+        .detail-thumb {
+            width: 64px;
+            height: 64px;
+            border: 1px solid var(--gray-800);
+            overflow: hidden;
+            cursor: pointer;
+            transition: border-color 0.3s;
+            flex-shrink: 0;
+        }
+
+        .detail-thumb.active { border-color: var(--gray-400); }
+        .detail-thumb:hover { border-color: var(--gray-600); }
+
+        .detail-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .detail-info { padding-top: 0.25rem; }
+
+        .detail-category {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-name {
+            font-family: var(--font-headline);
+            font-size: clamp(1.5rem, 3vw, 2.25rem);
+            font-weight: 900;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            color: var(--gray-100);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-sold-badge {
+            display: inline-block;
+            border: 1px solid var(--gray-700);
+            padding: 0.3rem 0.75rem;
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            margin-bottom: 1.25rem;
+        }
+
+        .detail-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--gray-800);
+        }
+
+        .detail-meta-row {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.8rem;
+        }
+
+        .detail-meta-label {
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            min-width: 4rem;
+        }
+
+        .detail-meta-value { color: var(--gray-300); }
+
+        .detail-price {
+            font-family: var(--font-headline);
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--gray-200);
+            letter-spacing: 0.05em;
+            margin-bottom: 0.25rem;
+        }
+
+        .detail-shipping {
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            margin-bottom: 1.75rem;
+        }
+
+        .add-to-cart-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            font-family: var(--font-headline);
+            font-size: 0.8rem;
+            font-weight: 900;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .add-to-cart-btn.available {
+            background: var(--white);
+            color: var(--black);
+        }
+
+        .add-to-cart-btn.available:hover { background: var(--gray-200); }
+
+        .add-to-cart-btn.in-cart {
+            background: transparent;
+            color: var(--gray-400);
+            border: 1px solid var(--gray-700);
+            cursor: default;
+        }
+
+        .add-to-cart-btn.sold-out {
+            background: transparent;
+            color: var(--gray-600);
+            border: 1px solid var(--gray-800);
+            cursor: not-allowed;
+        }
+
+        .detail-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            color: var(--gray-600);
+            font-size: 0.75rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .detail-not-found {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            gap: 1rem;
+            color: var(--gray-500);
+            font-size: 0.85rem;
+        }
+
+        .detail-not-found a {
+            font-size: 0.7rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--gray-500);
+            text-decoration: none;
+            border-bottom: 1px solid var(--gray-700);
+            padding-bottom: 0.2rem;
+            transition: color 0.3s;
+        }
+
+        .detail-not-found a:hover { color: var(--gray-300); }
+
+        @media (max-width: 768px) {
+            .detail-wrapper { padding: 5.5rem 1.5rem 4rem; }
+            .detail-layout { grid-template-columns: 1fr; gap: 2rem; }
+            .detail-images { position: static; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../../" class="logo"><img src="../../images/brennankeating.svg" alt="Brennan Keating"></a>
+        <ul class="nav-links">
+            <li><a href="../../">Home</a></li>
+            <li><a href="../../projects/">Projects</a></li>
+            <li><a href="../../artwork/">Artwork</a></li>
+            <li><a href="../../products/">Products</a></li>
+            <li><a href="../../services/">Services</a></li>
+            <li><a href="../../contact/">Contact</a></li>
+        </ul>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <div class="detail-wrapper">
+        <a href="/products/" class="back-link">
+            <svg viewBox="0 0 24 24" width="12" height="12" stroke="currentColor" stroke-width="2" fill="none">
+                <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+            </svg>
+            All Products
+        </a>
+        <div id="product-content">
+            <div class="detail-loading">Loading...</div>
+        </div>
+    </div>
+
+    <footer>
+        <p class="footer-text">&copy; 2026 Brennan Keating. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+    </footer>
+
+    <script src="/scripts/cart.js"></script>
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 100);
+        });
+
+        function escapeHtml(str) {
+            return String(str || '')
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+        }
+
+        function fmt(cents, currency) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency', currency: currency || 'USD', minimumFractionDigits: 0
+            }).format(cents / 100);
+        }
+
+        let currentProduct = null;
+
+        function refreshCartState() {
+            if (!currentProduct) return;
+            const btn = document.getElementById('add-to-cart-btn');
+            if (!btn) return;
+            if (currentProduct.sold) {
+                btn.className = 'add-to-cart-btn sold-out';
+                btn.textContent = 'Sold Out';
+                btn.disabled = true;
+            } else if (window.BKCart && window.BKCart.isInCart(currentProduct.id)) {
+                btn.className = 'add-to-cart-btn in-cart';
+                btn.textContent = '✓ Added to Cart';
+                btn.disabled = true;
+            } else {
+                btn.className = 'add-to-cart-btn available';
+                btn.textContent = 'Add to Cart';
+                btn.disabled = false;
+            }
+        }
+
+        window.bkRefreshCartState = refreshCartState;
+
+        function renderProduct(product) {
+            currentProduct = product;
+            document.title = product.name + ' | Brennan Keating';
+
+            const hasMultiple = product.images && product.images.length > 1;
+            const mainSrc = product.images && product.images[0] ? product.images[0] : '';
+
+            const thumbsHtml = hasMultiple
+                ? '<div class="detail-thumbs">' +
+                    product.images.map((src, i) =>
+                        '<div class="detail-thumb' + (i === 0 ? ' active' : '') + '" data-src="' + escapeHtml(src) + '">' +
+                            '<img src="' + escapeHtml(src) + '" alt="' + escapeHtml(product.name) + ' view ' + (i + 1) + '" loading="lazy">' +
+                        '</div>'
+                    ).join('') +
+                  '</div>'
+                : '';
+
+            const soldBadge = product.sold ? '<span class="detail-sold-badge">Sold Out</span>' : '';
+
+            const inCart = window.BKCart && window.BKCart.isInCart(product.id);
+            const btnClass = product.sold ? 'sold-out' : (inCart ? 'in-cart' : 'available');
+            const btnText = product.sold ? 'Sold Out' : (inCart ? '✓ Added to Cart' : 'Add to Cart');
+            const btnDisabled = product.sold || inCart;
+
+            document.getElementById('product-content').innerHTML =
+                '<div class="detail-layout">' +
+                    '<div class="detail-images">' +
+                        '<div class="detail-main-img">' +
+                            (mainSrc ? '<img id="main-product-img" src="' + escapeHtml(mainSrc) + '" alt="' + escapeHtml(product.name) + '" loading="eager">' : '') +
+                        '</div>' +
+                        thumbsHtml +
+                    '</div>' +
+                    '<div class="detail-info">' +
+                        '<p class="detail-category">Clothing</p>' +
+                        '<h1 class="detail-name">' + escapeHtml(product.name) + '</h1>' +
+                        soldBadge +
+                        '<div class="detail-meta">' +
+                            '<div class="detail-meta-row">' +
+                                '<span class="detail-meta-label">Size</span>' +
+                                '<span class="detail-meta-value">' + escapeHtml(product.size) + '</span>' +
+                            '</div>' +
+                            '<div class="detail-meta-row">' +
+                                '<span class="detail-meta-label">Item</span>' +
+                                '<span class="detail-meta-value">#' + escapeHtml(product.id) + '</span>' +
+                            '</div>' +
+                            '<div class="detail-meta-row">' +
+                                '<span class="detail-meta-label">Type</span>' +
+                                '<span class="detail-meta-value">1/1 — One of a kind</span>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div class="detail-price">' + escapeHtml(fmt(product.price, product.currency)) + '</div>' +
+                        '<p class="detail-shipping">+ ' + escapeHtml(fmt(product.shipping, product.currency)) + ' shipping</p>' +
+                        '<button id="add-to-cart-btn" class="add-to-cart-btn ' + btnClass + '"' + (btnDisabled ? ' disabled' : '') + '>' + btnText + '</button>' +
+                    '</div>' +
+                '</div>';
+
+            // Thumbnail switching
+            document.querySelectorAll('.detail-thumb').forEach(thumb => {
+                thumb.addEventListener('click', () => {
+                    const img = document.getElementById('main-product-img');
+                    if (img) {
+                        img.style.opacity = '0';
+                        setTimeout(() => {
+                            img.src = thumb.dataset.src;
+                            img.style.opacity = '1';
+                        }, 150);
+                    }
+                    document.querySelectorAll('.detail-thumb').forEach(t => t.classList.remove('active'));
+                    thumb.classList.add('active');
+                });
+            });
+
+            // Add to cart
+            const addBtn = document.getElementById('add-to-cart-btn');
+            if (addBtn && !product.sold) {
+                addBtn.addEventListener('click', () => {
+                    if (!window.BKCart || window.BKCart.isInCart(product.id)) return;
+                    window.BKCart.addItem({
+                        id: product.id,
+                        name: product.name,
+                        size: product.size,
+                        price: product.price,
+                        image: product.images ? product.images[0] : null
+                    });
+                    refreshCartState();
+                    window.BKCart.openCart();
+                });
+            }
+        }
+
+        async function loadProduct() {
+            const id = new URLSearchParams(location.search).get('id');
+            if (!id) {
+                document.getElementById('product-content').innerHTML =
+                    '<div class="detail-not-found"><p>Product not found.</p><a href="/products/">Browse all products</a></div>';
+                return;
+            }
+
+            try {
+                const res = await fetch('/products/clothing-products.json');
+                if (!res.ok) throw new Error('not found');
+                const products = await res.json();
+                const product = products.find(p => p.id === id);
+                if (!product) throw new Error('missing');
+                renderProduct(product);
+            } catch {
+                document.getElementById('product-content').innerHTML =
+                    '<div class="detail-not-found"><p>Product not found.</p><a href="/products/">Browse all products</a></div>';
+            }
+        }
+
+        loadProduct();
+    </script>
+</body>
+</html>
