@@ -20,7 +20,7 @@ export async function onRequestPost({ request, env }) {
   const params = new URLSearchParams();
 
   params.append('mode', 'payment');
-  params.append('ui_mode', 'embedded');
+  params.append('ui_mode', 'embedded_page');
   params.append('return_url', `${origin}/thankyou/?session_id={CHECKOUT_SESSION_ID}`);
   params.append('metadata[item_ids]', items.map(i => i.id).join(','));
 
