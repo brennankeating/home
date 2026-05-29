@@ -148,6 +148,8 @@
       var data = await res.json();
       if (data.clientSecret) {
         window.location.href = '/checkout/?cs=' + encodeURIComponent(data.clientSecret);
+      } else if (data.url) {
+        window.location.href = '/checkout/?url=' + encodeURIComponent(data.url);
       } else {
         throw new Error(data.error || 'Checkout failed');
       }

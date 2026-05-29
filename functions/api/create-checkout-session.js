@@ -53,7 +53,7 @@ export async function onRequestPost({ request, env }) {
     return json({ error: session.error?.message || 'Payment error' }, 500);
   }
 
-  return json({ clientSecret: session.client_secret });
+  return json({ url: session.url, clientSecret: session.client_secret });
 }
 
 function json(data, status = 200) {
