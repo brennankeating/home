@@ -20,8 +20,8 @@ export async function onRequestPost({ request, env }) {
   const params = new URLSearchParams();
 
   params.append('mode', 'payment');
-  params.append('success_url', `${origin}/thankyou/?bk=1`);
-  params.append('cancel_url', `${origin}/products/`);
+  params.append('ui_mode', 'embedded');
+  params.append('return_url', `${origin}/thankyou/?session_id={CHECKOUT_SESSION_ID}`);
   params.append('metadata[item_ids]', items.map(i => i.id).join(','));
 
   items.forEach((item, i) => {
@@ -53,7 +53,7 @@ export async function onRequestPost({ request, env }) {
     return json({ error: session.error?.message || 'Payment error' }, 500);
   }
 
-  return json({ url: session.url });
+  return json({ clientSecret: session.client_secret });
 }
 
 function json(data, status = 200) {

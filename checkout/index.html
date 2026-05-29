@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Brennan Keating</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="stylesheet" href="https://use.typekit.net/qen5jnd.css">
+    <link rel="stylesheet" href="../styles.css?v=3">
+    <style>
+        .checkout-page {
+            min-height: 100vh;
+            padding: 8rem 4rem 6rem;
+        }
+        .checkout-container {
+            max-width: 860px;
+            margin: 0 auto;
+        }
+        .checkout-heading {
+            font-family: var(--font-headline);
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 900;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 2.5rem;
+        }
+        #checkout-mount { min-height: 400px; }
+        @media (max-width: 768px) {
+            .checkout-page { padding: 7rem 1.5rem 4rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../" class="logo"><img src="../images/brennankeating.svg" alt="Brennan Keating"></a>
+        <ul class="nav-links">
+            <li><a href="../">Home</a></li>
+            <li><a href="../projects/">Projects</a></li>
+            <li><a href="../artwork/">Artwork</a></li>
+            <li><a href="../services/">Services</a></li>
+            <li><a href="../contact/">Contact</a></li>
+        </ul>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <section class="checkout-page">
+        <div class="checkout-container">
+            <div class="checkout-heading">Checkout</div>
+            <div id="checkout-mount"></div>
+        </div>
+    </section>
+
+    <footer>
+        <p class="footer-text">&copy; 2026 Brennan Keating. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+    </footer>
+
+    <script src="https://js.stripe.com/v3/"></script>
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+        window.addEventListener('scroll', () => {
+            document.querySelector('nav').classList.toggle('scrolled', window.scrollY > 100);
+        });
+
+        const cs = new URLSearchParams(location.search).get('cs');
+        if (!cs) {
+            window.location.replace('/products/');
+        } else {
+            const stripe = Stripe('pk_test_51TZhb3DMhV6ZzBc9RrTO9OVNwO0rI2zXTEV7P71YhsyRcyCX1SONxgZmH5I63sTMJHiNWuO6zLWE0OTex0j27LCt009Ll93IPw');
+            stripe.initEmbeddedCheckout({ fetchClientSecret: () => Promise.resolve(cs) })
+                .then(checkout => checkout.mount('#checkout-mount'));
+        }
+    </script>
+</body>
+</html>

@@ -209,7 +209,8 @@
         });
 
         // Clear cart after successful Stripe purchase
-        if (new URLSearchParams(location.search).has('bk')) {
+        const _p = new URLSearchParams(location.search);
+        if (_p.has('bk') || _p.has('session_id')) {
             localStorage.removeItem('bk_cart');
         }
     </script>

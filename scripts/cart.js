@@ -146,8 +146,8 @@
         body: JSON.stringify({ items: cart })
       });
       var data = await res.json();
-      if (data.url) {
-        window.location.href = data.url;
+      if (data.clientSecret) {
+        window.location.href = '/checkout/?cs=' + encodeURIComponent(data.clientSecret);
       } else {
         throw new Error(data.error || 'Checkout failed');
       }
