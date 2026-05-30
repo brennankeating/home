@@ -145,7 +145,10 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ items: cart })
       });
-      var data = await res.json();
+      var raw = await res.text();
+      var data;
+      try { data = JSON.parse(raw); }
+      catch (e) { throw new Error('HTTP ' + res.status + ' — body: ' + (raw.substring(0, 200) || '(empty)')); }
       if (data.clientSecret) {
         window.location.href = '/checkout/?cs=' + encodeURIComponent(data.clientSecret);
       } else if (data.url) {
