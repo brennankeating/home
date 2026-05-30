@@ -140,7 +140,7 @@
     if (btn) { btn.disabled = true; btn.textContent = 'Processing...'; }
 
     try {
-      var res = await fetch('/api/create-checkout-session', {
+      var res = await fetch('/api/order', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ items: cart })
@@ -151,7 +151,7 @@
       } else if (data.url) {
         window.location.href = '/checkout/?url=' + encodeURIComponent(data.url);
       } else {
-        throw new Error(data.error || 'Checkout failed');
+        throw new Error(data.error || 'Unexpected response: ' + JSON.stringify(data));
       }
     } catch (err) {
       alert('Checkout error: ' + err.message);
