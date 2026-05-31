@@ -97,7 +97,7 @@
         const url = params.get('url');
 
         if (cs) {
-            const stripe = Stripe('pk_test_51TZhb3DMhV6ZzBc9RrTO9OVNwO0rI2zXTEV7P71YhsyRcyCX1SONxgZmH5I63sTMJHiNWuO6zLWE0OTex0j27LCt009Ll93IPw');
+            const stripe = Stripe('pk_live_51TZhb3DMhV6ZzBc9L5xOAboXQqd0IE1oMLbm7a0CFH5WRHlerwnnTzBVKeme7roSGV4sS06if4khzcVUbZgCYIVl00EUUWdF8m');
             stripe.initEmbeddedCheckout({ fetchClientSecret: () => Promise.resolve(cs) })
                 .then(checkout => checkout.mount('#checkout-mount'));
         } else if (url) {

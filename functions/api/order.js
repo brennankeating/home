@@ -11,7 +11,7 @@ export async function onRequestPost({ request, env }) {
     return json({ error: 'Cart is empty' }, 400);
   }
 
-  const secretKey = env.STRIPE_SECRET_KEY_TEST;
+  const secretKey = env.STRIPE_SECRET_KEY;
   if (!secretKey) {
     return json({ error: 'Payment service not configured' }, 500);
   }
