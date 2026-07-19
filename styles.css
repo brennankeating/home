@@ -75,27 +75,32 @@ nav.scrolled {
     font-size: 0.875rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    position: relative;
-    transition: color 0.3s ease;
+    padding: 0.3rem 0.55rem;
+    margin: -0.3rem -0.55rem; /* cancels the padding so the highlight block doesn't shift layout */
 }
 
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 1px;
+.nav-links a:hover,
+.nav-links a:focus-visible {
+    color: var(--black);
     background: var(--white);
-    transition: width 0.3s ease;
+    outline: none;
 }
 
-.nav-links a:hover {
-    color: var(--white);
+@media (prefers-reduced-motion: no-preference) {
+    .nav-links a:hover {
+        animation: navDither 130ms steps(1, end) forwards;
+    }
 }
 
-.nav-links a:hover::after {
-    width: 100%;
+@keyframes navDither {
+    0% {
+        color: var(--white);
+        background: repeating-conic-gradient(var(--white) 0% 25%, transparent 0% 50%) 0 0 / 4px 4px;
+    }
+    50%, 100% {
+        color: var(--black);
+        background: var(--white);
+    }
 }
 
 .menu-toggle {
