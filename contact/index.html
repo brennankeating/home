@@ -31,7 +31,9 @@
         .contact-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            grid-template-rows: auto auto;
+            /* row 1 hugs the info block; the spanning form is absorbed by the 1fr row,
+               so the socials row starts right below the info in every browser */
+            grid-template-rows: auto 1fr;
             column-gap: 6rem;
             row-gap: 1.5rem;
             max-width: 1200px;
@@ -100,7 +102,6 @@
             grid-column: 1;
             grid-row: 2;
             align-self: start;
-            margin-top: -96px;
         }
 
         .contact-socials a {
@@ -170,9 +171,6 @@
         /* Form Styles */
         .contact-form-wrapper {
             background-color: var(--black);
-            background-image: url('../images/card1.png');
-            background-size: cover;
-            background-position: center;
             border: 1px solid var(--gray-800);
             padding: 3rem;
             grid-column: 2;
@@ -240,18 +238,13 @@
             color: var(--black);
             border: none;
             cursor: pointer;
-            transition: all 0.3s ease;
             margin-top: 1rem;
-        }
-
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 40px rgba(255, 255, 255, 0.2);
         }
 
         @media (max-width: 968px) {
             .contact-container {
                 grid-template-columns: 1fr;
+                grid-template-rows: none;
                 gap: 3rem;
             }
 

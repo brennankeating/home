@@ -70,6 +70,7 @@ nav.scrolled {
 }
 
 .nav-links a {
+    display: inline-block; /* inline backgrounds paint off-center in Safari */
     color: var(--gray-300);
     text-decoration: none;
     font-size: 0.875rem;
@@ -88,11 +89,11 @@ nav.scrolled {
 
 @media (prefers-reduced-motion: no-preference) {
     .nav-links a:hover {
-        animation: navDither 130ms steps(1, end) forwards;
+        animation: ditherToWhite 130ms steps(1, end) forwards;
     }
 }
 
-@keyframes navDither {
+@keyframes ditherToWhite {
     0% {
         color: var(--white);
         background: repeating-conic-gradient(var(--white) 0% 25%, transparent 0% 50%) 0 0 / 4px 4px;
@@ -100,6 +101,17 @@ nav.scrolled {
     50%, 100% {
         color: var(--black);
         background: var(--white);
+    }
+}
+
+@keyframes ditherToBlack {
+    0% {
+        color: var(--white);
+        background: repeating-conic-gradient(var(--white) 0% 25%, var(--black) 0% 50%) 0 0 / 4px 4px;
+    }
+    50%, 100% {
+        color: var(--white);
+        background: var(--black);
     }
 }
 
@@ -198,7 +210,6 @@ nav.scrolled {
     text-decoration: none;
     border: none;
     cursor: pointer;
-    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
 }
@@ -208,20 +219,62 @@ nav.scrolled {
     color: var(--black);
 }
 
-.btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 40px rgba(255, 255, 255, 0.2);
-}
-
 .btn-secondary {
     background: transparent;
     color: var(--white);
     border: 1px solid var(--gray-600);
 }
 
-.btn-secondary:hover {
+/* Dither invert rollover, shared by buttons and filters site-wide:
+   dark elements flash to white, white elements flash to black */
+.btn-secondary:hover,
+.btn-secondary:focus-visible,
+.about-card-btn:hover,
+.about-card-btn:focus-visible,
+.service-btn:hover,
+.service-btn:focus-visible,
+a.product-btn:hover,
+a.product-btn:focus-visible,
+.filter-btn:not(.active):hover,
+.filter-btn:not(.active):focus-visible,
+.filter-tab:not(.active):hover,
+.filter-tab:not(.active):focus-visible {
+    color: var(--black);
+    background: var(--white);
     border-color: var(--white);
-    background: rgba(255, 255, 255, 0.05);
+    outline: none;
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible,
+.submit-btn:hover,
+.submit-btn:focus-visible,
+.back-home-btn:hover,
+.back-home-btn:focus-visible,
+.add-to-cart-btn.available:hover,
+.add-to-cart-btn.available:focus-visible {
+    color: var(--white);
+    background: var(--black);
+    box-shadow: inset 0 0 0 1px var(--white);
+    outline: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .btn-secondary:hover,
+    .about-card-btn:hover,
+    .service-btn:hover,
+    a.product-btn:hover,
+    .filter-btn:not(.active):hover,
+    .filter-tab:not(.active):hover {
+        animation: ditherToWhite 130ms steps(1, end) forwards;
+    }
+
+    .btn-primary:hover,
+    .submit-btn:hover,
+    .back-home-btn:hover,
+    .add-to-cart-btn.available:hover {
+        animation: ditherToBlack 130ms steps(1, end) forwards;
+    }
 }
 
 .scroll-indicator {
@@ -303,8 +356,6 @@ nav.scrolled {
     position: relative;
     border: 1px solid var(--gray-800);
     background-color: var(--black);
-    background-size: cover;
-    background-position: center;
     display: flex;
     flex-direction: column;
     padding: 3rem 2rem;
@@ -332,21 +383,6 @@ nav.scrolled {
 
 .about-card:hover::before {
     opacity: 1;
-}
-
-.about-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: black;
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-    z-index: 1;
-}
-
-.about-card:hover::after {
-    opacity: 0.66;
 }
 
 .about-card > * {
@@ -407,13 +443,7 @@ nav.scrolled {
     color: var(--gray-400);
     border: 1px solid var(--gray-700);
     text-decoration: none;
-    transition: all 0.3s ease;
     background: transparent;
-}
-
-.about-card-btn:hover {
-    color: var(--gray-200);
-    border-color: var(--gray-400);
 }
 
 .featured-section {
@@ -519,14 +549,12 @@ nav.scrolled {
     letter-spacing: 0.15em;
     text-transform: uppercase;
     cursor: pointer;
-    transition: all 0.3s ease;
 }
 
-.filter-btn:hover,
 .filter-btn.active {
     border-color: var(--white);
-    color: var(--white);
-    background: rgba(255, 255, 255, 0.05);
+    color: var(--black);
+    background: var(--white);
 }
 
 .projects-grid {
