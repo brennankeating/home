@@ -960,20 +960,15 @@ footer {
     color: var(--white);
 }
 
-@media (max-width: 1056px) {
-    .about-grid {
-        grid-template-columns: 1fr;
-        max-width: 600px;
+/* The nav needs more room than the page layout, so it tightens and
+   collapses at its own, wider breakpoints */
+@media (max-width: 1440px) {
+    .nav-links {
+        gap: 2rem;
     }
+}
 
-    .featured-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .gallery-half {
-        grid-template-columns: 1fr;
-    }
-
+@media (max-width: 1280px) {
     nav:not(.project-nav) {
         padding: 1.5rem 2rem;
     }
@@ -1010,6 +1005,21 @@ footer {
 
     .menu-toggle.active span:nth-child(3) {
         transform: rotate(-45deg) translate(5px, -5px);
+    }
+}
+
+@media (max-width: 1056px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        max-width: 600px;
+    }
+
+    .featured-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery-half {
+        grid-template-columns: 1fr;
     }
 }
 

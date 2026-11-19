@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photography | Brennan Keating - Car & Fashion Photography</title>
+    <meta name="description" content="Explore Brennan Keating's photography portfolio featuring automotive and fashion photography.">
+    <meta name="keywords" content="photography, car photography, automotive photography, fashion photography, photography portfolio">
+    <meta name="author" content="Brennan Keating">
+    <meta property="og:title" content="Photography | Brennan Keating">
+    <meta property="og:description" content="A photography portfolio of car and fashion shoots by Brennan Keating.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://brennankeating.com/photography/">
+    <link rel="canonical" href="https://brennankeating.com/photography/">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="stylesheet" href="https://use.typekit.net/qen5jnd.css">
+    <link rel="stylesheet" href="../styles.css?v=6">
+    <style>
+        /* Photography Page Specific Styles */
+
+        /* Masonry columns so landscape car shots and portrait fashion shots keep their shape */
+        .photo-grid {
+            columns: 3;
+            column-gap: 1.5rem;
+            padding: 0 4rem 8rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .photo-item {
+            break-inside: avoid;
+            margin: 0 0 1.5rem;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid var(--gray-800);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease, border-color 0.3s ease;
+        }
+
+        .photo-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .photo-item:hover {
+            border-color: var(--gray-600);
+        }
+
+        .photo-item img {
+            display: block;
+            width: 100%;
+            height: auto;
+            /* Holds space before a lazy-loaded photo arrives, then uses its real shape */
+            aspect-ratio: auto 3 / 4;
+            transition: transform 0.6s ease;
+        }
+
+        .photo-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .photo-empty {
+            text-align: center;
+            color: var(--gray-500);
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            padding: 0 2rem 8rem;
+        }
+
+        /* Lightbox Styles */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            padding: 2rem;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 90vw;
+            max-height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lightbox-content img {
+            max-width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border: 1px solid var(--gray-700);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            background: transparent;
+            border: 1px solid var(--gray-600);
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-close:hover {
+            border-color: var(--white);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 50px;
+            height: 50px;
+            background: transparent;
+            border: 1px solid var(--gray-600);
+            color: var(--white);
+            font-size: 1.25rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-nav:hover {
+            border-color: var(--white);
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .lightbox-prev {
+            left: -70px;
+        }
+
+        .lightbox-next {
+            right: -70px;
+        }
+
+        .lightbox-counter {
+            position: absolute;
+            bottom: -45px;
+            right: 0;
+            font-size: 0.75rem;
+            color: var(--gray-500);
+            letter-spacing: 0.1em;
+        }
+
+        .photo-caption {
+            position: absolute;
+            bottom: -45px;
+            left: 0;
+            font-size: 0.75rem;
+            color: var(--gray-400);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 1024px) {
+            .photo-grid {
+                columns: 2;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .photo-grid {
+                padding: 0 2rem 5rem;
+                columns: 1;
+            }
+
+            .photo-item {
+                margin-bottom: 1rem;
+            }
+
+            .lightbox-prev {
+                left: 10px;
+            }
+
+            .lightbox-next {
+                right: 10px;
+            }
+
+            .lightbox-nav {
+                width: 40px;
+                height: 40px;
+            }
+
+            .lightbox-content img {
+                max-height: 70vh;
+            }
+
+            .lightbox-counter,
+            .photo-caption {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../" class="logo"><img src="../images/brennankeating.svg" alt="Brennan Keating"></a>
+        <ul class="nav-links">
+            <li><a href="../">Home</a></li>
+            <li><a href="../projects/">Projects</a></li>
+            <li><a href="../artwork/">Artwork</a></li>
+            <li><a href="../photography/">Photography</a></li>
+            <li><a href="../products/">Products</a></li>
+            <li><a href="../services/">Services</a></li>
+            <li><a href="../contact/">Contact</a></li>
+        </ul>
+        <div class="menu-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <header class="page-header">
+        <h1 class="page-title">Photography</h1>
+        <p class="page-subtitle">A collection of car and fashion photography.</p>
+    </header>
+
+    <div class="filter-tabs">
+        <button class="filter-btn active" data-filter="all">All Photos</button>
+        <button class="filter-btn" data-filter="car">Car Photography</button>
+        <button class="filter-btn" data-filter="fashion">Fashion Photography</button>
+    </div>
+
+    <section class="photo-grid" id="photo-grid"></section>
+    <p class="photo-empty" id="photo-empty" hidden>Photos coming soon.</p>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <button class="lightbox-close">&times;</button>
+            <button class="lightbox-nav lightbox-prev">&larr;</button>
+            <img src="" alt="Photo" id="lightbox-img">
+            <button class="lightbox-nav lightbox-next">&rarr;</button>
+            <span class="photo-caption" id="photo-caption"></span>
+            <div class="lightbox-counter">
+                <span id="current-index">1</span> / <span id="total-count">1</span>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p class="footer-text">&copy; 2026 Brennan Keating. All rights reserved.</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
+        // The photo list comes from photos.json, which scripts/sync-photos.js
+        // regenerates (and sorts) automatically whenever photos are committed
+        const photoCategories = [
+            { key: 'car', label: 'Car Photography' },
+            { key: 'fashion', label: 'Fashion Photography' }
+        ];
+
+        const photoGrid = document.getElementById('photo-grid');
+        const photoEmpty = document.getElementById('photo-empty');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        let photosLoaded = false;
+        let currentFilter = 'all';
+
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    fadeObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        function addPhoto(category, file, number) {
+            const item = document.createElement('figure');
+            item.className = 'photo-item';
+            item.dataset.category = category.key;
+            item.dataset.label = category.label;
+            item.hidden = !matchesFilter(item);
+
+            const img = document.createElement('img');
+            img.loading = 'lazy';
+            img.alt = `${category.label} ${number}`;
+            img.onload = () => fadeObserver.observe(item);
+            img.onerror = () => {
+                item.remove();
+                updateEmptyState();
+            };
+            img.src = `../images/photography/${category.key}/${encodeURIComponent(file)}`;
+
+            item.appendChild(img);
+            item.addEventListener('click', () => openLightbox(item));
+            photoGrid.appendChild(item);
+        }
+
+        async function loadPhotos() {
+            try {
+                const res = await fetch('./photos.json');
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+                const photos = await res.json();
+
+                photoCategories.forEach(category => {
+                    (photos[category.key] || []).forEach((file, i) => addPhoto(category, file, i + 1));
+                });
+            } catch (err) {
+                console.error('Could not load photo list:', err);
+            }
+            photosLoaded = true;
+            updateEmptyState();
+        }
+
+        function matchesFilter(item) {
+            return currentFilter === 'all' || item.dataset.category === currentFilter;
+        }
+
+        function updateEmptyState() {
+            const anyVisible = photoGrid.querySelector('.photo-item:not([hidden])');
+            photoEmpty.hidden = !photosLoaded || Boolean(anyVisible);
+        }
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentFilter = btn.dataset.filter;
+
+                photoGrid.querySelectorAll('.photo-item').forEach(item => {
+                    item.hidden = !matchesFilter(item);
+                });
+                updateEmptyState();
+            });
+        });
+
+        loadPhotos();
+
+        // Lightbox — steps through the photos visible under the current filter
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const currentIndexEl = document.getElementById('current-index');
+        const totalCountEl = document.getElementById('total-count');
+        const photoCaptionEl = document.getElementById('photo-caption');
+
+        let lightboxItems = [];
+        let lightboxIndex = 0;
+
+        function openLightbox(item) {
+            lightboxItems = [...photoGrid.querySelectorAll('.photo-item:not([hidden])')];
+            lightboxIndex = lightboxItems.indexOf(item);
+            showLightboxPhoto();
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function showLightboxPhoto() {
+            const img = lightboxItems[lightboxIndex].querySelector('img');
+            lightboxImg.src = img.src;
+            lightboxImg.alt = img.alt;
+            photoCaptionEl.textContent = lightboxItems[lightboxIndex].dataset.label;
+            currentIndexEl.textContent = lightboxIndex + 1;
+            totalCountEl.textContent = lightboxItems.length;
+        }
+
+        function stepLightbox(delta) {
+            lightboxIndex = (lightboxIndex + delta + lightboxItems.length) % lightboxItems.length;
+            showLightboxPhoto();
+        }
+
+        document.querySelector('.lightbox-close').addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        document.querySelector('.lightbox-prev').addEventListener('click', (e) => {
+            e.stopPropagation();
+            stepLightbox(-1);
+        });
+
+        document.querySelector('.lightbox-next').addEventListener('click', (e) => {
+            e.stopPropagation();
+            stepLightbox(1);
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') stepLightbox(-1);
+            if (e.key === 'ArrowRight') stepLightbox(1);
+        });
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "Brennan Keating Photography",
+        "description": "A photography portfolio of car and fashion shoots by Brennan Keating.",
+        "url": "https://brennankeating.com/photography/",
+        "author": {
+            "@type": "Person",
+            "name": "Brennan Keating"
+        }
+    }
+    </script>
+</body>
+</html>
